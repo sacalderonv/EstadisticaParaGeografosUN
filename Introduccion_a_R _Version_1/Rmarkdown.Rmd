@@ -1,0 +1,105 @@
+---
+title: "Intro R"
+output: html_document
+date: "2023-08-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Trabajo en R Markdown
+
+Este es un documento de R Markdown. El cual es un formato simple para crear documentos tipo HTML, PDF, and MS Word. Para mas detalles de R Markdown visite <http://rmarkdown.rstudio.com> o <https://rmarkdown.rstudio.com/articles_intro.html>.
+
+La idea será entonces en estos espacio escribir las notas, comentarios o ecuaciones requeridas. Mientras que en los ***chunks*** vienen los códigos de R que serán ejecutados.
+
+## Objetos de R
+
+En R existen diferentes tipos de objetos, y dependiendo de las necesidades se hace importanteaprender a manejarlas. A continuación presentamos los Objetos mas usados. A los objetos se les puede aplicar funciones de R las cuales permiten obtener información de tales objetos o transformarlos.
+
+### 
+
+Vector Atómico
+
+Un vector atómico no es mas que un vector de datos.
+
+### Vectores
+
+La estructura de datos mas simple es el el vector numérico. Se crea de la siguiente forma usando = o \<- que se le conoce como asignación.
+
+```{r vectores}
+x_num=c(1,3,5,7,9)
+x_num<-c(1,3,5,7,9)
+x_num
+str(x_num) ##Muestra la estructura del objeto de forma compacta.
+class(x_num)
+typeof(x_num)
+```
+
+En Rstudio se pueden ver los objetos creados en la ventana derecha arriba por defecto. También se puede consultar ayuda de las funciones como sigue:
+
+```{r ayuda}
+?class
+```
+
+También se puede usar la ventana de la derecha.
+
+### Números
+
+Un número es considerado un vector de una dimensión.
+
+```{r numeros}
+num_num<-9.8
+y_num=c(x_num,num_num)
+y_num
+pi
+class(num_num)
+class(pi)
+```
+
+### 
+
+Vector de Caracteres
+
+```{r caracteres}
+x_carac<-c("Rojo","Verde","Azul")
+x_carac
+class(x_carac)
+str(x_carac)
+
+```
+
+### Accesando a los objetos
+
+Podemos accesar a los elementos que conforma el vector de la siguiente forma:
+
+```{r Acceso}
+x_carac
+x_carac[1]
+
+```
+
+### 
+
+Operaciones básicas entre vectores numéricos
+
+### Adición
+
+La adición de dos vectores $X$, $Y$ se define como $X+Y$, y es la suma componente a componente.Los vectores deben tener mas mismas dimensiones. En R se usa en símbolo $+$.
+
+```{r adicion}
+X_num=c(1,2,3)
+Y_num=c(1,-1,2)
+Z_num=X_num+Y_num
+Z_num
+```
+
+### Producto
+
+Dependiendo la necesidad, hay mas de una forma de definir el producto $\cdot$ de dos vectores $X\cdot Y$. En este caso lo que se hace es una multiplicación componente a  componente. En R se usa el símbolo $\ast$ para el producto de los vectores.
+
+```{r producto}
+X_num*Y_num
+```
+
