@@ -2,7 +2,7 @@
 
 ###En R existen diferentes tipos de objetos,
 ###y dependiendo de las necesidades se hace importante
-###aprender a mnejarlas. A continuación presentamos los
+###aprender a manejarlas. A continuación presentamos los
 ### Objetos mas usados.
 ##A los objetos se les puede aplicar funciones de R
 ##las cuales permiten obtener información de tales objetos
@@ -12,11 +12,12 @@
 
 ## Vectores----
 
-# La estructura de datos mas simple es el el vector numérico.
+# La estructura de datos mas simple es el vector numérico.
 ###Se crea de la siguiente forma usando = o <- que se le conoce como asignación.
 
 x_num=c(1,3,5,7,9)
-x_num<-c(1,3,5,7,9)
+x_num
+y_num<-c(1,3,5,7,9)
 str(x_num) ##Muestra la estructura del objeto de forma compacta.
 class(x_num)
 typeof(x_num)
@@ -35,12 +36,16 @@ pi
 x_carac<-c("Rojo","Verde","Azul")
 class(x_carac)
 str(x_carac)
-
+y_carac=c("T1","T2","T3","T4","T5")
 
 ## Accesando a los objetos====
 ## Podemos accesar a los elementos que conforma el vector de la siguiente forma
 x_carac
-x_carac[1]
+x_carac[4]
+
+y_carac[4]
+
+y_carac[2:4]
 
 ## Operaciones básicas entre vectores numéricos====
 ### Adición----
@@ -48,7 +53,7 @@ x_carac[1]
 X_num=c(1,2,3)
 Y_num=c(1,-1,2)
 Z_num=X_num+Y_num
-
+W_num=X_num-Y_num
 ### Producto====
 ###Dependiendo la necesidad, hay mas de una forma de definir el producto
 ### de dos vectores. En este caso lo que se hace es una multiplicación componente a
@@ -59,9 +64,10 @@ length(X_num)
 dim(X_num) ##dim es para matrices.
 
 
-
-
-
+Z=c(9,7,0,-3,"estadística","geografía",5.76)
+class(Z)
+str(Z)
+Z
 
 
 ## Listas====
@@ -76,10 +82,14 @@ str(Lista1)
 Lista2<-list(nombres=c("Andres","Camila","Pedro","Sandra"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),ubicaciones=matrix(c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037, -74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801),4,2))
 Lista2
 str(Lista2)
-##Usted puede acceder a cualquier elememento de la lista como sigue:
+##Usted puede acceder a cualquier elemento de la lista como sigue:
 Lista2$nombres
 Lista2$ubicaciones
 
+Lista2$Localidad
+Lista2$Edad
+
+Lista2[[4]]
 ## Data Frames y ahora tibbles====
 ###Los data frames(marcos de datos) son la versión bidimensional de una lista. 
 ###Son, por mucho, la estructura de almacenamiento más útil para el 
@@ -105,7 +115,9 @@ str(df_1)
 typeof(df_1)
 ##Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna
 ####Tarea:Crear un nuevo dataframe que incluya además de las variables anteriores
-###las dos variables adicionales la latitud y longitud. 
+###las dos variables adicionales de la Lista2, la latitud y longitud.
+### Con base en el dataframe df_1, crear dos nuevas columas con las latitudes y longitudes de la Lista2.
+###También añadir un registro adicional(Consultar como se hace?)
 
 ###Tarea: Crear un data frame con al menos 10 registros, donde cada registro corresponde a
 ### una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
