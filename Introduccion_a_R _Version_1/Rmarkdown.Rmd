@@ -97,9 +97,58 @@ Z_num
 
 ### Producto
 
-Dependiendo la necesidad, hay mas de una forma de definir el producto $\cdot$ de dos vectores $X\cdot Y$. En este caso lo que se hace es una multiplicación componente a  componente. En R se usa el símbolo $\ast$ para el producto de los vectores.
+Dependiendo la necesidad, hay mas de una forma de definir el producto $\cdot$ de dos vectores $X\cdot Y$. En este caso lo que se hace es una multiplicación componente a componente. En R se usa el símbolo $\ast$ para el producto de los vectores.
 
 ```{r producto}
 X_num*Y_num
+### Chequear dimensiones----
+length(X_num)
+dim(X_num) ##dim es para matrices.
+
 ```
+
+### Listas
+
+Las listas son vectores atómicos que permiten tener diversos tipos de datos en cada entrada.
+
+```{r Listas}
+Lista1<-list("A",c(1,2,3),matrix(c(1,2,3,4),2,2))
+Lista1
+class(Lista1)
+typeof(Lista1)
+str(Lista1)
+
+Lista2<-list(nombres=c("Andres","Camila","Pedro","Sandra"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),ubicaciones=matrix(c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037, -74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801),4,2))
+Lista2
+str(Lista2)
+##Usted puede acceder a cualquier elememento de la lista como sigue:
+Lista2$nombres
+Lista2$ubicaciones
+```
+
+## Data Frames y ahora Tibbles
+
+Los data frames(marcos de datos) son la versión bidimensional de una lista. Son, por mucho, la estructura de almacenamiento más útil para el análisis de datos y proporcionan una forma ideal de almacenar un registro completo de datos.
+
+Un tibble, o tbl_df, es una reinvención moderna del data.frame, manteniendo el tiempo que ha demostrado ser efectivo y descartando lo que no lo es. Los Tibbles son data frames que son perezosos y hoscos: hacen menos (es decir, no cambian los nombres o tipos de variables, y no hacen coincidencias parciales) y se quejan más(por ejemplo, cuando una variable no existe). Esto lo obliga a enfrentar los problemas de antes, lo que generalmente conduce a un código más limpio y expresivo.
+
+### Ejemplo 
+Vamos a crear a data frame con las tres primeras entradas del objeto Lista2, donde cada columna hace referencia a una variable medida a un cierto individuo.
+
+```{r dataframe1}
+df_1=data.frame(Nombres=Lista2$nombres,Edad=Lista2$Edad,Localidad=Lista2$Localidad)
+df_1
+class(df_1)
+str(df_1)
+typeof(df_1)
+```
+
+Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna
+####Tarea:Crear un nuevo dataframe que incluya además de las variables anteriores
+###las dos variables adicionales la latitud y longitud. 
+
+###Tarea: Crear un data frame con al menos 10 registros, donde cada registro corresponde a
+### una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
+
+
 

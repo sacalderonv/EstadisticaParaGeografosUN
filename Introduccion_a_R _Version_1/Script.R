@@ -17,7 +17,7 @@
 
 x_num=c(1,3,5,7,9)
 x_num<-c(1,3,5,7,9)
-str(x_num) ##Muestra la estructura del obejto de forma compacta.
+str(x_num) ##Muestra la estructura del objeto de forma compacta.
 class(x_num)
 typeof(x_num)
 ##En Rstudio se pueden ver los objetos creados en la ventana derecha arriba por defecto
@@ -56,7 +56,7 @@ Z_num=X_num+Y_num
 X_num*Y_num
 ### Chequear dimensiones----
 length(X_num)
-dim(X_num). ##dim es para matrices.
+dim(X_num) ##dim es para matrices.
 
 
 
@@ -82,7 +82,7 @@ Lista2$ubicaciones
 
 ## Data Frames y ahora tibbles====
 ###Los data frames(marcos de datos) son la versión bidimensional de una lista. 
-###Son, con mucho, la estructura de almacenamiento más útil para el 
+###Son, por mucho, la estructura de almacenamiento más útil para el 
 ###análisis de datos y proporcionan una forma ideal de almacenar un registro completo de datos.
 ### Un tibble, o tbl_df, es una reinvención moderna del data.frame, manteniendo el tiempo 
 ### que ha demostrado ser efectivo y descartando lo que no lo es. 
@@ -104,8 +104,73 @@ class(df_1)
 str(df_1)
 typeof(df_1)
 ##Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna
-####Tarea:Crear un nuevo data frame que incluya además de las variables anteriores
+####Tarea:Crear un nuevo dataframe que incluya además de las variables anteriores
 ###las dos variables adicionales la latitud y longitud. 
 
 ###Tarea: Crear un data frame con al menos 10 registros, donde cada registro corresponde a
 ### una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
+
+
+### Accediendo a elementos de un dataframe----
+
+#Se puede acceder primariamente a los elementos de un dataframe
+#es decir a las columnas de dataframe o variables medidas. Esto se hace 
+#análogamente a como se hizo con las listas.
+df_1$Nombres ##Se accede a la variable a columna Nombres
+df_1$Localidad
+
+mean(df_1$Edad)
+sd(df_1$Edad)
+table(df_1$Localidad)
+table(df_1$Localidad,df_1$Nombres). #Tabla de contingencia
+## Tibbles ----
+#Los tibbles, como antes se indicó son una evolución del dataframe
+#a estructuras de datos que permitan la manipulación y el análisis de forma
+#un poco mas fácil. Los tibbles trabajan en el entorno de tidyverse
+# el cual es un paquete de R. Antes de hablar de tibbles, veámos comos e instala un
+# un paquete que no viene pre-instalado o no se ha instalado con anterioridad.
+
+# Hay varias formas de instalar un paquete en R, aquí trataremos las
+#dos formas mas comunes: 
+### Instalación mediante un orden o una función----
+##Para esto se requiere el nombre exacto.
+install.packages("tidyverse") ###Esto puede tardar bastante.
+##tibble es un paquete que hace parte del entorno tidyverse
+#Una vez instalado el paquete o núcleo procede a cargar o llamar el paquete para que esté disponible.
+##Se hace con la función library().
+library(tidyverse)
+
+# Una vez instalado y cargado el paquete podemos empezar a usarlo.
+
+#La forma fácil de crear un objeto tibble, consiste en usar directamente un dataframe
+# Viste el siguiente enlace para mas detalles \url{https://r4ds.had.co.nz/tibbles.html}
+tbl_df1=tibble::as_tibble(df_1)
+
+### Tarea ----
+# Use el conjunto de datos iris haciendolo activos mediante data("iris")
+data("iris")
+iris
+# Crear un objeto tibble de ese conjunto
+# Explore el archivo y obtenga estadísticas 
+##básicas de las variables nuuméricas y tablas
+tbl_iris<-as_tibble(iris)
+
+## También se puede crear un objeto tibble como se hizo el dataframe
+tbl_lista<-tibble::tibble(nombres=c("Andres","Camila","Pedro","Sandra"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),latitud=c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037), longitud=c(-74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801))
+tbl_lista
+
+
+###Trabajando con objeto tibble ----
+#### Operador Pipe
+# Los Pipes son una herramienta poderosa para expresar claramente una secuencia de múltiples operaciones.
+# El operador Pipe mas usado es %>% o |> disponible en versiones de R a partir de la 4.1
+
+### Ejemplo de Operaciones----
+#### Selección de Variables----
+tbl_lista|>select(nombres)
+tbl_lista|>select(Localidad)
+
+#### Agrupamientos----
+tbl_lista|>group_by(Localidad)
+Grupos_iris<-tbl_iris|>group_by(Species)
+##Revise la salida en la ventana de objetos

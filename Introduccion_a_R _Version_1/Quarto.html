@@ -246,6 +246,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1 -2  6</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Chequear dimensiones----</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(X_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(X_num) <span class="do">##dim es para matrices.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+</section>
+<section id="listas" class="level3">
+<h3 class="anchored" data-anchor-id="listas">Listas</h3>
+<p>Las listas son vectores atómicos que permiten tener diversos tipos de datos en cada entrada.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Lista1<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="st">"A"</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>Lista1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "A"
+
+[[2]]
+[1] 1 2 3
+
+[[3]]
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Lista1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(Lista1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Lista1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 3
+ $ : chr "A"
+ $ : num [1:3] 1 2 3
+ $ : num [1:2, 1:2] 1 2 3 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>Lista2<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">nombres=</span><span class="fu">c</span>(<span class="st">"Andres"</span>,<span class="st">"Camila"</span>,<span class="st">"Pedro"</span>,<span class="st">"Sandra"</span>),<span class="at">Edad=</span><span class="fu">c</span>(<span class="dv">19</span>,<span class="dv">21</span>,<span class="dv">18</span>,<span class="dv">20</span>),<span class="at">Localidad=</span><span class="fu">c</span>(<span class="st">"Teusaquillo"</span>,<span class="st">"Suba"</span>,<span class="st">"Chapinero"</span>,<span class="st">"Kennedy"</span>),<span class="at">ubicaciones=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">4.6188864</span>,<span class="fl">4.706369089343199</span>,<span class="fl">4.618767017331927</span>,<span class="fl">4.632883977507037</span>, <span class="sc">-</span><span class="fl">74.1354241</span>, <span class="sc">-</span><span class="fl">74.0412070354434</span>, <span class="sc">-</span><span class="fl">74.08648338089243</span>, <span class="sc">-</span><span class="fl">74.11558088496801</span>),<span class="dv">4</span>,<span class="dv">2</span>))</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>Lista2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$nombres
+[1] "Andres" "Camila" "Pedro"  "Sandra"
+
+$Edad
+[1] 19 21 18 20
+
+$Localidad
+[1] "Teusaquillo" "Suba"        "Chapinero"   "Kennedy"    
+
+$ubicaciones
+         [,1]      [,2]
+[1,] 4.618886 -74.13542
+[2,] 4.706369 -74.04121
+[3,] 4.618767 -74.08648
+[4,] 4.632884 -74.11558</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Lista2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 4
+ $ nombres    : chr [1:4] "Andres" "Camila" "Pedro" "Sandra"
+ $ Edad       : num [1:4] 19 21 18 20
+ $ Localidad  : chr [1:4] "Teusaquillo" "Suba" "Chapinero" "Kennedy"
+ $ ubicaciones: num [1:4, 1:2] 4.62 4.71 4.62 4.63 -74.14 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Usted puede acceder a cualquier elememento de la lista como sigue:</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>Lista2<span class="sc">$</span>nombres</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Andres" "Camila" "Pedro"  "Sandra"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>Lista2<span class="sc">$</span>ubicaciones</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]      [,2]
+[1,] 4.618886 -74.13542
+[2,] 4.706369 -74.04121
+[3,] 4.618767 -74.08648
+[4,] 4.632884 -74.11558</code></pre>
+</div>
 </div>
 </section>
 </section>
