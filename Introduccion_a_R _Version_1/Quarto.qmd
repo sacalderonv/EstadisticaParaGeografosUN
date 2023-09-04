@@ -102,6 +102,7 @@ dim(X_num) ##dim es para matrices.
 ```
 
 ### Listas
+
 Las listas son vectores atómicos que permiten tener diversos tipos de datos en cada entrada.
 
 ```{r Listas}
@@ -125,8 +126,6 @@ Los data frames(marcos de datos) son la versión bidimensional de una lista. Son
 
 Un tibble, o tbl_df, es una reinvención moderna del data.frame, manteniendo el tiempo que ha demostrado ser efectivo y descartando lo que no lo es. Los Tibbles son data frames que son perezosos y hoscos: hacen menos (es decir, no cambian los nombres o tipos de variables, y no hacen coincidencias parciales) y se quejan más(por ejemplo, cuando una variable no existe). Esto lo obliga a enfrentar los problemas de antes, lo que generalmente conduce a un código más limpio y expresivo.
 
-### Ejemplo 
+### Ejemplo
+
 Vamos a crear a data frame con las tres primeras entradas del objeto Lista2, donde cada columna hace referencia a una variable medida a un cierto individuo.
-
-
-
