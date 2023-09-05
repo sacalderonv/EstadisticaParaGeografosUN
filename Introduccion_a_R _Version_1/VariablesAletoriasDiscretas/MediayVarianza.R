@@ -18,3 +18,12 @@ media_1=sum(x*p_x)
 varianza_1=sum(((x-media_1)^2)*p_x)
 media_1
 varianza_1
+
+##Gráfico de la función de distribución ----
+
+plot(x,p_x,type = "h")
+
+###Creando la acumulada
+F_x=cumsum(c(0,p_x))
+###Gráfico Acumulada ====
+plot(stepfun(x,F_x),main="Distribución Acumulada")
