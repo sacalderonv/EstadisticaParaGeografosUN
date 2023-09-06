@@ -1,0 +1,29 @@
+---
+title: "VADiscretas"
+format: html
+editor: visual
+---
+
+## Variables Aletorias discretas Especiales
+
+Vamos a trabajar con algunas funciones de R que permiten calcular probabilidades de variables aleatorias discretas.
+
+## Distribución Binomial
+
+Recordemos que la distribución de probabilidad Binomial corresponde a:
+
+$$p(x)=[X=x]=\binom{n}{x}p^{x}(1-p)^{n-x}$$
+para $x=0,1,\cdots,n.$
+
+```{r Binomial}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
