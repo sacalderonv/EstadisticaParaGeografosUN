@@ -13,17 +13,29 @@ Vamos a trabajar con algunas funciones de R que permiten calcular probabilidades
 Recordemos que la distribución de probabilidad Binomial corresponde a:
 
 $$p(x)=[X=x]=\binom{n}{x}p^{x}(1-p)^{n-x}$$
+
 para $x=0,1,\cdots,n.$
 
-```{r Binomial}
-1 + 1
+Existen funciones en R para calcular probabilidades $P[X=x]$, como lo es *dbinom()* y para $P[X\leq x]$ sería *pbinom()*. Estas funciones tienen argumentos. el argumento *size* hace referencia al número de ensayos $n$, mientras que el argumento *prob* hace referencia a la probabilidad de éxito $p$ . También los argumentos *x* o *q* de estas funciones hacen referencia al valor que toma la variable de interés.
+
+### Distribución de probabilidad
+
+Para el ejemplo de los árboles de totumo, queremos calcular por ejemplo $P[X=3]$, para esto se usa la función *dbinom()* como sigue:
+
+```{r distribucion Binomial}
+
+dbinom(3,size = 10,prob =0.4 )
+choose(10,3)*(0.4)^3*(0.6)^7
 ```
 
-You can add options to executable code like this
+Ahora, supongamos que se desea calcular la probabilidad $P[X\leq 4]=F(4)$, veamos como se calcula usando la función *pbinom*:
 
-```{r}
-#| echo: false
-2 * 2
+### Distribución de Acumulada
+
+```{r acumulada binomial}
+pbinom(4,size = 10,prob =0.4 )
+
+choose(10,0)*(0.4)^0*(0.6)^10+choose(10,1)*(0.4)^1*(0.6)^9+choose(10,2)*(0.4)^2*(0.6)^8+choose(10,3)*(0.4)^3*(0.6)^7+choose(10,4)*(0.4)^4*(0.6)^6
+
+dbinom(0,size = 10,prob =0.4 )+dbinom(1,size = 10,prob =0.4 )+dbinom(2,size = 10,prob =0.4 )+dbinom(3,size = 10,prob =0.4 )+dbinom(4,size = 10,prob =0.4 )
 ```
-
-The `echo: false` option disables the printing of code (only output is displayed).
