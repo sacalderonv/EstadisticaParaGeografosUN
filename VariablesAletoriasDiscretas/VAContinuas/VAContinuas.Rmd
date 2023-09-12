@@ -1,0 +1,38 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Área bajo la Curva
+
+```{r probabilidad como área bajo la curva}
+# Instala ggplot2 si aún no lo tienes instalado
+# install.packages("ggplot2")
+
+# Carga la librería ggplot2
+library(ggplot2)
+
+# Valor hasta el cual deseas sombrear el área bajo la curva
+valor_limite <- 1
+
+# Crea una secuencia de valores para el eje x
+x <- seq(-3, 3, length = 1000)
+
+# Calcula la función de densidad de probabilidad (PDF) para la distribución normal estándar
+pdf <- dnorm(x)
+
+# Crea un marco de datos con los valores de x y PDF
+data <- data.frame(x, pdf)
+
+# Crea el gráfico del área bajo la curva hasta el valor límite
+ggplot(data, aes(x = x, y = pdf)) +
+  geom_line(color = "blue") +  # Línea de la PDF completa
+  geom_area(data = subset(data, x <= valor_limite), fill = "blue", alpha = 0.3) +  # Área sombreada hasta el valor límite
+  xlab("Variable Aleatoria Continua") +
+  ylab("Densidad de Probabilidad") +
+  ggtitle("Función de Densidad de Probabilidad con Área Sombreada")
+
+```
+
+
+
