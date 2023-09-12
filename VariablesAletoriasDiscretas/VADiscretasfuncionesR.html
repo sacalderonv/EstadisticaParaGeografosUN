@@ -124,8 +124,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="variables-aletorias-discretas-especiales" class="level2">
-<h2 class="anchored" data-anchor-id="variables-aletorias-discretas-especiales">Variables Aletorias discretas Especiales</h2>
+<section id="variables-aleatorias-discretas-especiales" class="level2">
+<h2 class="anchored" data-anchor-id="variables-aleatorias-discretas-especiales">Variables Aleatorias discretas Especiales</h2>
 <p>Vamos a trabajar con algunas funciones de R que permiten calcular probabilidades de variables aleatorias discretas.</p>
 </section>
 <section id="distribución-binomial" class="level2">
@@ -165,7 +165,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.6331033</code></pre>
 </div>
 </div>
+<p><strong>Tarea:</strong> Cómo se calcularía la probabilidad de hayan entre 3 y 7 árboles de totumo?</p>
 </section>
+</section>
+<section id="distribución-poisson" class="level2">
+<h2 class="anchored" data-anchor-id="distribución-poisson">Distribución Poisson</h2>
+<p>Recordemos como es la distribución de probabilidad de Poisson de parámetro <span class="math inline">\(\lambda\)</span>:</p>
+<p><span class="math display">\[p_X(x)=P[X=x]=\frac{e^{-\lambda} \lambda^x}{x!}, \ \ x=0,1,2,\cdots.\]</span></p>
+<p>Recordemos el ejemplo relacionado con <span class="math inline">\(X:\)</span> el número promedio de nacimientos al día en Colombia, es de 41.8. En este caso parece razonable pensar que <span class="math inline">\(X\sim Exp(\lambda=41.8).\)</span> Cómo calculamos las probabilidades del ejemplo?</p>
+<p>Veamos por ejemplo <span class="math inline">\(P[X=50]\)</span> y <span class="math inline">\(P[X\leq 45].\)</span> Iniciemos con <span class="math inline">\(P[X=50]\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lbd<span class="ot">=</span><span class="fl">41.8</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">50</span>,<span class="at">lambda=</span>lbd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02643808</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">exp</span>(<span class="sc">-</span>lbd)<span class="sc">*</span>lbd<span class="sc">^</span>(<span class="dv">50</span>))<span class="sc">/</span>(<span class="fu">factorial</span>(<span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02643808</code></pre>
+</div>
+</div>
+<p>Ahora veamos mcomo se calcula <span class="math inline">\(P[X\leq 45].\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">45</span>,<span class="at">lambda =</span> lbd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7222768</code></pre>
+</div>
+</div>
+<p>Note que hacer la suma desde <span class="math inline">\(x=0\)</span> hasta <span class="math inline">\(x=45\)</span> es poco práctico.</p>
 </section>
 
 </main>

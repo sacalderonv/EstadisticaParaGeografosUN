@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-## Variables Aletorias discretas Especiales
+## Variables Aleatorias discretas Especiales
 
 Vamos a trabajar con algunas funciones de R que permiten calcular probabilidades de variables aleatorias discretas.
 
@@ -39,3 +39,34 @@ choose(10,0)*(0.4)^0*(0.6)^10+choose(10,1)*(0.4)^1*(0.6)^9+choose(10,2)*(0.4)^2*
 
 dbinom(0,size = 10,prob =0.4 )+dbinom(1,size = 10,prob =0.4 )+dbinom(2,size = 10,prob =0.4 )+dbinom(3,size = 10,prob =0.4 )+dbinom(4,size = 10,prob =0.4 )
 ```
+
+**Tarea:** Cómo se calcularía la probabilidad de hayan entre 3 y 7 árboles de totumo?
+
+## Distribución Poisson
+
+Recordemos como es la distribución de probabilidad de Poisson de parámetro $\lambda$:
+
+$$p_X(x)=P[X=x]=\frac{e^{-\lambda} \lambda^x}{x!}, \ \ x=0,1,2,\cdots.$$
+
+Recordemos el ejemplo relacionado con  $X:$ el número promedio de nacimientos al día en Colombia, es de 41.8. En este caso parece razonable pensar que $X\sim Exp(\lambda=41.8).$ Cómo calculamos las probabilidades del ejemplo?
+
+Veamos por ejemplo $P[X=50]$ y $P[X\leq 45].$
+Iniciemos con $P[X=50]$.
+
+```{r Poiss distribucion}
+lbd=41.8
+dpois(50,lambda=lbd)
+
+
+(exp(-lbd)*lbd^(50))/(factorial(50))
+```
+
+Ahora veamos mcomo se calcula $P[X\leq 45].$
+
+```{r poiss acumulada}
+ppois(45,lambda = lbd)
+```
+
+Note que hacer la suma desde $x=0$ hasta $x=45$ es poco práctico.
+
+
