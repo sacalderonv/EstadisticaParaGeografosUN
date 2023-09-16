@@ -60,10 +60,18 @@ dpois(50,lambda=lbd)
 (exp(-lbd)*lbd^(50))/(factorial(50))
 ```
 
-Ahora veamos mcomo se calcula $P[X\leq 45].$
+Ahora veamos como se calcula $P[X\leq 45].$
 
 ```{r poiss acumulada}
 ppois(45,lambda = lbd)
 ```
 
 Note que hacer la suma desde $x=0$ hasta $x=45$ es poco práctico.
+
+# Gráfico de la distribución de Poisson
+
+```{r gráfico posisson}
+x=seq(0,100,1)
+y=dpois(x,lambda=41.8)
+plot(x,y,type="h")
+```
