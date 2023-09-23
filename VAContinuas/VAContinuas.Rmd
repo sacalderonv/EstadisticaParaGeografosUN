@@ -74,3 +74,15 @@ qunif(0.75,min=2.5,max=3.5)
 ```
 
 El cuantil $x_{0.75}$ o percentil 75, que es 3.25, es el peso de un niño cualquiera entre 0 y meses tal que supera al $75\%$ de los pesos de otros niños, y equivalentemente, 3.25 es el peso de un niño entre 0 y 3 meses tal que supera al $75\%$ de los niños en ese rango de edad en cuanto al pesos se refiere.
+
+# Distribución Normal
+
+Ahora consideremos la distribución normal o densidad normal.
+
+Una V.A X tiene la distribución normal de parámetros media $-\infty<\mu<\infty$ y varianza $\sigma^2>0$, si su función de densidad es como sigue:
+
+$$
+f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}}, \text{ para $-\infty <x<\infty$}
+$$
+
+Si esto es así, diremos que la V.A $X$ tiene distribución normal de media $\mu$ y varianza $\sigma^2$, o lo escribiremos de forma compacta como $X\sim N(\mu,\sigma^2).$
