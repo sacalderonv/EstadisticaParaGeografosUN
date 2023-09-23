@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## Área bajo la Curva
@@ -86,3 +88,70 @@ f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}}, \tex
 $$
 
 Si esto es así, diremos que la V.A $X$ tiene distribución normal de media $\mu$ y varianza $\sigma^2$, o lo escribiremos de forma compacta como $X\sim N(\mu,\sigma^2).$
+
+Veamos ahora como calcular probabilidades y cuantiles de la distribución normal con base en el ejemplo:
+
+Por estudios de la encuesta nacional de hogares para el año 2022, se conoce que los ingresos promedio de hogares en la región Caribe son de \$ \$ 2.444.312\$, mientras que la desviación estándar es de $\$ 437.824$. De la misma manera, en la región Andina el ingreso promedio es de $\$ 2.790.288$ y su respectiva desviación estándar es de \$\$495.072 \$. Suponga que la V.A. de los ingresos por hogar en ambas regiones tienen distribución normal con los parámetros poblacionales respectivos.\\
+
+```         
+Sea $X$ la V.A que mide los ingresos por hogares en la región Caribe, mientras $Y$ es la V.A para el caso de la región Andina. Calculemos las probabilidades de los siguientes eventos:
+ $P[X<2600000]$ y  $P[Y<2600000]$
+$P[2500000<X<2600000]$ y $P[2500000<Y<2600000]$
+$P[X>2700000]$ y  $P[Y>2700000]$
+```
+
+```{r Normal}
+#Punto 1
+pnorm(2600000,mean =2444312,sd =  437824 )
+pnorm(2600000,mean =2790288,sd =  495072 )
+#### punto 2
+pnorm(2600000,mean =2444312,sd =  437824 )-pnorm(2500000,mean =2444312,sd =  437824 )
+
+pnorm(2600000,mean =2790288,sd =  495072 )-pnorm(2500000,mean =2790288,sd =  495072 )
+
+##Punto 3
+1-pnorm(2700000,mean =2444312,sd =  437824 )
+pnorm(2700000,mean =2444312,sd =  437824,lower.tail = FALSE )
+
+##Completar el punto 3
+
+
+##Punto 4
+mux=2444312
+sdx=437824
+pnorm(mux+3*sdx,mean =2444312,sd =  437824 )-pnorm(mux-3*sdx,mean =2444312,sd =  437824 )
+mux+3*sdx
+mux-3*sdx
+
+##Completar el punto 4
+```
+
+Adicionalmente, cuales son la media y la mediana de las dos variables aleatorias o distribuciones, así como el cuantil $0.05$ o percentil 5, y el cuantil $0.95$ o percentil 95. Cómo se interpretan estas cantidades?
+
+```{r cuantiles normal}
+qnorm(0.5,mean =2444312,sd =  437824) ##Mediana
+qnorm(0.05,mean =2444312,sd =  437824) ##Cuantil 0.05 o percentil 5.
+qnorm(0.95,mean =2444312,sd =  437824) ##Cuantil 0.95 o percentil 95.
+```
+
+La mediana se interpreta de las siguiente maneras equivalentes:
+
+-   La mitad de los hogares de la región Caribe tiene un ingreso inferior a 2444312, mientras que la otra mitad tiene un ingresos superior a ese valor.
+
+-   El 50% de los hogares de la región Caribe tiene un ingreso inferior a 2444312, mientras que el otro 50% tiene un ingresos superior a ese valor.
+
+-   La probabilidad de encontrar un ingreso inferior a 2444312 en algún hogar de la región Caribe es de 0.5, y también la probabilidad de encontrar un ingreso superior a 2444312 en algún hogar de la región Caribe es de 0.5
+
+El percentil 5 se interpreta de las siguiente maneras equivalentes:
+
+-   El 5% de los hogares de la región Caribe tiene un ingreso inferior a 1724156, mientras que el 95% tiene un ingresos superior a ese valor.
+
+-   La probabilidad de encontrar un ingreso inferior a 1724156 en algún hogar de la región Caribe es de 0.05, y también la probabilidad de encontrar un ingreso superior a 1724156 en algún hogar de la región Caribe es de 0.95.
+
+El percentil 95 se interpreta de las siguiente maneras equivalentes:
+
+-   El 95% de los hogares de la región Caribe tiene un ingreso inferior a 3164468, mientras que el 5% tiene un ingresos superior a ese valor.
+
+-   La probabilidad de encontrar un ingreso inferior a 3164468 en algún hogar de la región Caribe es de 0.95, y también la probabilidad de encontrar un ingreso superior a 3164468 en algún hogar de la región Caribe es de 0.05.
+
+**Tarea: Realizar los mismo para las preguntas de la región Andina.**
