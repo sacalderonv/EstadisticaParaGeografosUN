@@ -155,3 +155,5 @@ El percentil 95 se interpreta de las siguiente maneras equivalentes:
 -   La probabilidad de encontrar un ingreso inferior a 3164468 en algún hogar de la región Caribe es de 0.95, y también la probabilidad de encontrar un ingreso superior a 3164468 en algún hogar de la región Caribe es de 0.05.
 
 **Tarea: Realizar los mismo para las preguntas de la región Andina.**
+
+## 

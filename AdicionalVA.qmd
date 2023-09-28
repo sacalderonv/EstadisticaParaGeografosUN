@@ -1,0 +1,95 @@
+---
+title: "Adicional V.A"
+format: html
+editor: visual
+---
+
+## Tópico Adicionales acerca de Variables Aletorias.
+
+## Vamos a tratar un par mas de temas acerca de V.A.
+
+## Distribuciones Simétricas, sesgadas y de colas pesadas
+
+### Ditribuciones simétricas
+
+Una variable aleatoria $X$ tiene distribución simétrica alrededor de $a$ si $a-X \overset{D}{=} X-a$. De lo contrario diremos que es sesgada. Si X tiene densidad $f$, entonces la distribución de X es simétrica si $f(x-a)=f(x+a)$.
+
+Hay muchas ejemplos de distribuciones simétricas que ya vimos anteriormente, cómo la
+
+```{r normal}
+x <- seq(-10, 10, length = 500)
+mu=0
+sigma=2
+plot(x,dnorm(x,mean = mu,sd=sigma),main="Densidad Normal",type="l")
+
+```
+
+```{r student t}
+x <- seq(-10, 10, length = 500)
+gl=4
+ncp=0
+plot(x,dt(x,df =gl,ncp =ncp),main="Densidad t-student",type="l")
+
+
+
+```
+
+**Tarea:** Cómo haría un gráfico de una distribución uniforme continua?
+
+## Distribuciones Sesgadas
+
+```{r chi cuadrado}
+x <- seq(0, 10, length = 500)
+gl=3
+
+plot(x,dchisq(x,df =gl),main="Densidad Chi-cuadrado",type="l")
+
+```
+
+```{r densidad F}
+x <- seq(0, 10, length = 500)
+gl1=3
+gl2=5
+
+plot(x,df(x,df1=gl1,df2=gl2),main="Densidad F",type="l")
+```
+
+```{r gamma}
+x <- seq(0, 50, length = 500)
+forma=3
+escala=2
+
+plot(x,dgamma(x,shape = forma,scale =escala ),main="Densidad gamma",type="l")
+```
+
+```{r poisson}
+
+x <- seq(0, 15)
+tasa=2
+
+plot(x,dpois(x,lambda = tasa),main="Densidad Poisson",type="h")
+```
+
+## Distribuciones Multimodales
+
+```{r Mezcla de distribuciones 1}
+library(LaplacesDemon)
+p <- c(0.3,0.7)
+mu <- c(-5, 5)
+sigma <- c(2,1)
+x <- seq(from=-10, to=10, by=0.1)
+plot(x, dnormm(x, p, mu, sigma, log=FALSE), type="l") #Density
+#plot(x, pnormm(x, p, mu, sigma), type="l") #CDF
+#plot(density(rnormm(10000, p, mu, sigma))) #Random Deviates
+```
+
+```{r Mezcla de distribuciones 2}
+library(LaplacesDemon)
+p <- c(0.3,0.3,0.4)
+mu <- c(-5, 1, 5)
+sigma <- c(1,2,1)
+x <- seq(from=-10, to=10, by=0.1)
+plot(x, dnormm(x, p, mu, sigma, log=FALSE), type="l") #Density
+#plot(x, pnormm(x, p, mu, sigma), type="l") #CDF
+#plot(density(rnormm(10000, p, mu, sigma))) #Random Deviates
+```
