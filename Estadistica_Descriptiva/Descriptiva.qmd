@@ -1,0 +1,18 @@
+---
+title: "Descriptiva"
+format: html
+editor: visual
+---
+
+# Estadística Descriptiva
+
+Vamos a iniciar con la estadística descriptiva para V.A's numéricas.
+
+## Gráficos para Variables numéricas continuas
+
+Vamos a usar a función hist para realizar el histograma.
+
+```{r pesos}
+pesos=c(	116.26, 96.19,  98.94, 114.04, 112.94,  89.10,  91.26,  86.41, 101.81, 101.64, 103.64, 105.52,  93.98,  90.06, 110.26, 107.51, 84.90,  99.04,  91.04,  79.29, 101.50,  99.20,  99.02, 102.16, 108.82, 102.05,  93.83,  92.65,  98.68, 103.100)
+hist(pesos,main = "Histograma Pesos Ceibas")
+```
