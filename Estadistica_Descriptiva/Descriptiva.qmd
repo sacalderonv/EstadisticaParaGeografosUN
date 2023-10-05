@@ -13,6 +13,85 @@ Vamos a iniciar con la estadística descriptiva para V.A's numéricas.
 Vamos a usar a función hist para realizar el histograma.
 
 ```{r pesos}
-pesos=c(	116.26, 96.19,  98.94, 114.04, 112.94,  89.10,  91.26,  86.41, 101.81, 101.64, 103.64, 105.52,  93.98,  90.06, 110.26, 107.51, 84.90,  99.04,  91.04,  79.29, 101.50,  99.20,  99.02, 102.16, 108.82, 102.05,  93.83,  92.65,  98.68, 103.100)
+pesos=c(303.37, 301.02, 292.24, 300.30, 299.94, 291.24, 297.93, 306.81, 303.49, 302.12,
+292.82, 297.89, 296.84, 301.09, 303.95, 289.44, 296.99, 310.30, 296.80, 302.50,
+305.99, 301.16, 305.53, 305.02, 303.21, 310.32, 294.25, 299.62, 306.27, 293.37)
 hist(pesos,main = "Histograma Pesos Ceibas")
+
+###
+
+hist(pesos,freq=FALSE,prob=TRUE,col = "lightblue",main='Histograma de pesos de Ceibas',xlab='Toneladas',ylab='Densidad')
+lines(density(pesos),col = "chocolate3")
+
+```
+
+**Ejercicio:** Use la base en BaseEjemplo.xlsx, y haga el histograma de frecuencias para las V.A's numéricas.
+
+```{r Hist Discreta}
+num_nidos<-c(9,  6,  7,  7,  6,  9,  7,  3,  4,  6,  6,  6,  8,  2,  7,  3,  5,  5,  4,  7,  4,  9,  7,  8,  8,  2, 12, 10,  4,  7)
+discreta<-as.data.frame(num_nidos)
+ggplot(discreta,aes(num_nidos))+geom_bar()
+library(arm)
+arm::discrete.histogram(discreta$num_nidos)
+
+
+```
+
+**Ejercicio:** Use la base en BaseEjemplo.xlsx, y haga el histograma de frecuencias para las V.A's numéricas discretas.
+
+## Variables Categóricas
+
+```{r categoricas}
+dolencias=c("O","O","N","J","C","F","B","B","F","O","J","O","O","O","F","F","O","O",
+"N","O","N","J","F","J","B","O","C","J","O","J","J","F","N","O","B","M","O","J","M","O","B",
+"O","F",  "J",  "O",  "O",  "B",  "N",  "C",  "O",  "O",  "O","M",  "B","F","J",  "O",  "F",  "N")
+Tabladolencias=table(dolencias)
+barplot(Tabladolencias)
+Tabladolencias
+
+###Proporciones
+
+Tabladolencias_prop=Tabladolencias/sum(Tabladolencias)
+Tabladolencias_prop
+
+```
+
+**Tarea:** *Use la información en la base BaseEjemplo.xlsx y realice los gráficos de barras para las V.A's categóricas.*
+
+# Medidas de Resumen
+
+```{r Medidas de Resumen pesos}
+
+media_pesos<-mean(pesos) #Media
+media_pesos
+mediana_pesos<-quantile(pesos,probs = 0.5) #Mediana
+mediana_pesos
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+moda_pesos<-getmode(pesos) ###Moda
+moda_pesos
+
+
+```
+
+```{r grafica con medidas}
+hist(pesos,col = "white")
+abline(v=c(media_pesos,mediana_pesos,moda_pesos),col=c("red","blue","green"))
+legend("topleft", legend = c("Media", "Mediana", "Moda"), col = c("red", "blue", "green"), lty = 1, lwd = 2,cex = 0.5)
+
+```
+
+# Medidas de dispersión o variabilidad
+
+```{r dispersion}
+library(sjstats)
+library(moments)
+
+sjstats::cv(pesos) ##Coeficiente de variación
+sd(pesos) ###Desviación estándar
+sd(pesos)^2 ###Varianza
+max(pesos)-min(pesos) ##Rango
+
 ```
