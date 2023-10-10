@@ -28,6 +28,7 @@ lines(density(pesos),col = "chocolate3")
 **Ejercicio:** Use la base en BaseEjemplo.xlsx, y haga el histograma de frecuencias para las V.A's numéricas.
 
 ```{r Hist Discreta}
+library(ggplot2)
 num_nidos<-c(9,  6,  7,  7,  6,  9,  7,  3,  4,  6,  6,  6,  8,  2,  7,  3,  5,  5,  4,  7,  4,  9,  7,  8,  8,  2, 12, 10,  4,  7)
 discreta<-as.data.frame(num_nidos)
 ggplot(discreta,aes(num_nidos))+geom_bar()
@@ -83,15 +84,80 @@ legend("topleft", legend = c("Media", "Mediana", "Moda"), col = c("red", "blue",
 
 ```
 
-# Medidas de dispersión o variabilidad
+```{r media ponderada}
+library(readxl)
+
+Gastos_pond<-read_excel("/Users/sergiocalderon/Documents/GitHub/EstadisticaParaGeografos/EstadisticaParaGeografosUN/Estadistica_Descriptiva/Ponderada.xlsx",sheet = "Ejemplo")
+
+med_pond=(sum(Gastos_pond$Gasto*Gastos_pond$Exposicion))/(sum(Gastos_pond$Exposicion))
+med_pond ##Media ponderada
+mean(Gastos_pond$Gasto)  ##Media aritmética
+```
+
+**Tarea:** Realizar la misma experiencia para los datos de la hoja ejercicio del archivo Ponderada.xlsx.
+
+## Cuantiles
+
+Recordemos que los cuantiles de la distribución se definen como:
+
+Sea $\alpha$ un número entre 0 y 1. El percentil $(100 \alpha)$ o cuantil $(\alpha)$ de la distribución de una V.A. continua $X$, denotado por $\eta(\alpha)$ o $x_{\alpha}$, está definido como un valor que toma la V.A (valor posible de la V.A) tal que satisface
+
+$$\alpha=F(\eta(\alpha))=F(x_{\alpha})=\int_{-\infty}^{x_{\alpha}}f(y)\cdot dy.$$
+
+Los cuantiles representan son valores que toma la V.A, tal que satisface que ese valor deja un cierta probabilidad acumulada de $\alpha.$
+
+```{r cuantiles}
+quantile(pesos,probs = c(0.10)) ###Percentil 10
+quantile(pesos,probs = c(0.95))###Percentil 95
+```
+
+**Cómo se interpretan estos valores?**
+
+# Box-Plot
+
+```{r Box-Plot}
+library(plotly)
+fig <- plot_ly(y = pesos, type = "box")
+fig  ##Vertical
+fig_1 <- plot_ly(x = pesos, type = "box")
+#fig_1 ##Horizontal
+
+
+fig_1 <- fig_1 %>% add_boxplot(x = pesos, jitter = 0.3, pointpos = -1.8, boxpoints = 'all',
+              marker = list(color = 'rgb(7,40,89)'),
+              line = list(color = 'rgb(7,40,89)'),
+              name = "All Points")
+fig_1
+```
+
+```{r Boxplot}
+boxplot(pesos)
+boxplot(pesos,horizontal = TRUE)
+```
+
+```{r Box_Plot Base Ejemplo}
+BaseEjemplo <- read_excel("/Users/sergiocalderon/Documents/GitHub/EstadisticaParaGeografos/EstadisticaParaGeografosUN/Estadistica_Descriptiva/BaseEjemplo.xlsx")
+fig_gasto <- plot_ly(y = BaseEjemplo$gastosemanal, type = "box")
+fig_gasto <- fig_gasto %>% add_boxplot(y = BaseEjemplo$gastosemanal, jitter = 0.3, pointpos = -1.8, boxpoints = 'all',
+              marker = list(color = 'rgb(7,40,89)'),
+              line = list(color = 'rgb(7,40,89)'),
+              name = "All Points")
+fig_gasto
+```
+
+# Medidas de dispersión o variabilidad, asimetría y sesgo
 
 ```{r dispersion}
 library(sjstats)
 library(moments)
 
-sjstats::cv(pesos) ##Coeficiente de variación
+sjstats::cv(pesos) ##Coeficiente de variación es útil, cuando la variable es la misma, pero es hecha en unidades diferentes.
 sd(pesos) ###Desviación estándar
 sd(pesos)^2 ###Varianza
 max(pesos)-min(pesos) ##Rango
+
+skewness(pesos) ###Asimetría
+
+kurtosis(pesos)###Coeficiente de apuntamiento o curtosis, permite ver si tiene colas mas pesadas que la de la distribución normal(el cual es 3 de forma teórica)
 
 ```
