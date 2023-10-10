@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Descriptiva</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Descriptiva_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Descriptiva_files/libs/quarto-html/quarto.js"></script>
+<script src="Descriptiva_files/libs/quarto-html/popper.min.js"></script>
+<script src="Descriptiva_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Descriptiva_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Descriptiva_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Descriptiva_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Descriptiva_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Descriptiva_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Descriptiva_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Descriptiva_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="Descriptiva_files/libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="Descriptiva_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="Descriptiva_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="Descriptiva_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="Descriptiva_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="Descriptiva_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="Descriptiva_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Descriptiva</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="estadística-descriptiva" class="level1">
+<h1>Estadística Descriptiva</h1>
+<p>Vamos a iniciar con la estadística descriptiva para V.A’s numéricas.</p>
+<section id="gráficos-para-variables-numéricas-continuas" class="level2">
+<h2 class="anchored" data-anchor-id="gráficos-para-variables-numéricas-continuas">Gráficos para Variables numéricas continuas</h2>
+<p>Vamos a usar a función hist para realizar el histograma.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pesos<span class="ot">=</span><span class="fu">c</span>(<span class="fl">303.37</span>, <span class="fl">301.02</span>, <span class="fl">292.24</span>, <span class="fl">300.30</span>, <span class="fl">299.94</span>, <span class="fl">291.24</span>, <span class="fl">297.93</span>, <span class="fl">306.81</span>, <span class="fl">303.49</span>, <span class="fl">302.12</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fl">292.82</span>, <span class="fl">297.89</span>, <span class="fl">296.84</span>, <span class="fl">301.09</span>, <span class="fl">303.95</span>, <span class="fl">289.44</span>, <span class="fl">296.99</span>, <span class="fl">310.30</span>, <span class="fl">296.80</span>, <span class="fl">302.50</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fl">305.99</span>, <span class="fl">301.16</span>, <span class="fl">305.53</span>, <span class="fl">305.02</span>, <span class="fl">303.21</span>, <span class="fl">310.32</span>, <span class="fl">294.25</span>, <span class="fl">299.62</span>, <span class="fl">306.27</span>, <span class="fl">293.37</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pesos,<span class="at">main =</span> <span class="st">"Histograma Pesos Ceibas"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/pesos-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pesos,<span class="at">freq=</span><span class="cn">FALSE</span>,<span class="at">prob=</span><span class="cn">TRUE</span>,<span class="at">col =</span> <span class="st">"lightblue"</span>,<span class="at">main=</span><span class="st">'Histograma de pesos de Ceibas'</span>,<span class="at">xlab=</span><span class="st">'Toneladas'</span>,<span class="at">ylab=</span><span class="st">'Densidad'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(pesos),<span class="at">col =</span> <span class="st">"chocolate3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/pesos-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Ejercicio:</strong> Use la base en BaseEjemplo.xlsx, y haga el histograma de frecuencias para las V.A’s numéricas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>num_nidos<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">9</span>,  <span class="dv">6</span>,  <span class="dv">7</span>,  <span class="dv">7</span>,  <span class="dv">6</span>,  <span class="dv">9</span>,  <span class="dv">7</span>,  <span class="dv">3</span>,  <span class="dv">4</span>,  <span class="dv">6</span>,  <span class="dv">6</span>,  <span class="dv">6</span>,  <span class="dv">8</span>,  <span class="dv">2</span>,  <span class="dv">7</span>,  <span class="dv">3</span>,  <span class="dv">5</span>,  <span class="dv">5</span>,  <span class="dv">4</span>,  <span class="dv">7</span>,  <span class="dv">4</span>,  <span class="dv">9</span>,  <span class="dv">7</span>,  <span class="dv">8</span>,  <span class="dv">8</span>,  <span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">10</span>,  <span class="dv">4</span>,  <span class="dv">7</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>discreta<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(num_nidos)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(discreta,<span class="fu">aes</span>(num_nidos))<span class="sc">+</span><span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/Hist%20Discreta-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: MASS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lme4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+arm (Version 1.13-1, built: 2022-8-25)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Working directory is /Users/sergiocalderon/Documents/GitHub/EstadisticaParaGeografos/EstadisticaParaGeografosUN/Estadistica_Descriptiva</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>arm<span class="sc">::</span><span class="fu">discrete.histogram</span>(discreta<span class="sc">$</span>num_nidos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/Hist%20Discreta-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Ejercicio:</strong> Use la base en BaseEjemplo.xlsx, y haga el histograma de frecuencias para las V.A’s numéricas discretas.</p>
+</section>
+<section id="variables-categóricas" class="level2">
+<h2 class="anchored" data-anchor-id="variables-categóricas">Variables Categóricas</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dolencias<span class="ot">=</span><span class="fu">c</span>(<span class="st">"O"</span>,<span class="st">"O"</span>,<span class="st">"N"</span>,<span class="st">"J"</span>,<span class="st">"C"</span>,<span class="st">"F"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>,<span class="st">"F"</span>,<span class="st">"O"</span>,<span class="st">"J"</span>,<span class="st">"O"</span>,<span class="st">"O"</span>,<span class="st">"O"</span>,<span class="st">"F"</span>,<span class="st">"F"</span>,<span class="st">"O"</span>,<span class="st">"O"</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">"N"</span>,<span class="st">"O"</span>,<span class="st">"N"</span>,<span class="st">"J"</span>,<span class="st">"F"</span>,<span class="st">"J"</span>,<span class="st">"B"</span>,<span class="st">"O"</span>,<span class="st">"C"</span>,<span class="st">"J"</span>,<span class="st">"O"</span>,<span class="st">"J"</span>,<span class="st">"J"</span>,<span class="st">"F"</span>,<span class="st">"N"</span>,<span class="st">"O"</span>,<span class="st">"B"</span>,<span class="st">"M"</span>,<span class="st">"O"</span>,<span class="st">"J"</span>,<span class="st">"M"</span>,<span class="st">"O"</span>,<span class="st">"B"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">"O"</span>,<span class="st">"F"</span>,  <span class="st">"J"</span>,  <span class="st">"O"</span>,  <span class="st">"O"</span>,  <span class="st">"B"</span>,  <span class="st">"N"</span>,  <span class="st">"C"</span>,  <span class="st">"O"</span>,  <span class="st">"O"</span>,  <span class="st">"O"</span>,<span class="st">"M"</span>,  <span class="st">"B"</span>,<span class="st">"F"</span>,<span class="st">"J"</span>,  <span class="st">"O"</span>,  <span class="st">"F"</span>,  <span class="st">"N"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Tabladolencias<span class="ot">=</span><span class="fu">table</span>(dolencias)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(Tabladolencias)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/categoricas-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Tabladolencias</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>dolencias
+ B  C  F  J  M  N  O 
+ 7  3  9 10  3  6 21 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">###Proporciones</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Tabladolencias_prop<span class="ot">=</span>Tabladolencias<span class="sc">/</span><span class="fu">sum</span>(Tabladolencias)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>Tabladolencias_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>dolencias
+         B          C          F          J          M          N          O 
+0.11864407 0.05084746 0.15254237 0.16949153 0.05084746 0.10169492 0.35593220 </code></pre>
+</div>
+</div>
+<p><strong>Tarea:</strong> <em>Use la información en la base BaseEjemplo.xlsx y realice los gráficos de barras para las V.A’s categóricas.</em></p>
+</section>
+</section>
+<section id="medidas-de-resumen" class="level1">
+<h1>Medidas de Resumen</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>media_pesos<span class="ot">&lt;-</span><span class="fu">mean</span>(pesos) <span class="co">#Media</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>media_pesos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 300.394</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mediana_pesos<span class="ot">&lt;-</span><span class="fu">quantile</span>(pesos,<span class="at">probs =</span> <span class="fl">0.5</span>) <span class="co">#Mediana</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mediana_pesos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    50% 
+301.055 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(v)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(v, uniqv)))]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>moda_pesos<span class="ot">&lt;-</span><span class="fu">getmode</span>(pesos) <span class="do">###Moda</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>moda_pesos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 303.37</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pesos,<span class="at">col =</span> <span class="st">"white"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(media_pesos,mediana_pesos,moda_pesos),<span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"blue"</span>,<span class="st">"green"</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Media"</span>, <span class="st">"Mediana"</span>, <span class="st">"Moda"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>,<span class="at">cex =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/grafica%20con%20medidas-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Gastos_pond<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">"/Users/sergiocalderon/Documents/GitHub/EstadisticaParaGeografos/EstadisticaParaGeografosUN/Estadistica_Descriptiva/Ponderada.xlsx"</span>,<span class="at">sheet =</span> <span class="st">"Ejemplo"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>med_pond<span class="ot">=</span>(<span class="fu">sum</span>(Gastos_pond<span class="sc">$</span>Gasto<span class="sc">*</span>Gastos_pond<span class="sc">$</span>Exposicion))<span class="sc">/</span>(<span class="fu">sum</span>(Gastos_pond<span class="sc">$</span>Exposicion))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>med_pond <span class="do">##Media ponderada</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1535206</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Gastos_pond<span class="sc">$</span>Gasto)  <span class="do">##Media aritmética</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1424733</code></pre>
+</div>
+</div>
+<p><strong>Tarea:</strong> Realizar la misma experiencia para los datos de la hoja ejercicio del archivo Ponderada.xlsx.</p>
+<section id="cuantiles" class="level2">
+<h2 class="anchored" data-anchor-id="cuantiles">Cuantiles</h2>
+<p>Recordemos que los cuantiles de la distribución se definen como:</p>
+<p>Sea <span class="math inline">\(\alpha\)</span> un número entre 0 y 1. El percentil <span class="math inline">\((100 \alpha)\)</span> o cuantil <span class="math inline">\((\alpha)\)</span> de la distribución de una V.A. continua <span class="math inline">\(X\)</span>, denotado por <span class="math inline">\(\eta(\alpha)\)</span> o <span class="math inline">\(x_{\alpha}\)</span>, está definido como un valor que toma la V.A (valor posible de la V.A) tal que satisface</p>
+<p><span class="math display">\[\alpha=F(\eta(\alpha))=F(x_{\alpha})=\int_{-\infty}^{x_{\alpha}}f(y)\cdot dy.\]</span></p>
+<p>Los cuantiles representan son valores que toma la V.A, tal que satisface que ese valor deja un cierta probabilidad acumulada de <span class="math inline">\(\alpha.\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(pesos,<span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.10</span>)) <span class="do">###Percentil 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    10% 
+292.762 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(pesos,<span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.95</span>))<span class="do">###Percentil 95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     95% 
+308.7295 </code></pre>
+</div>
+</div>
+<p><strong>Cómo se interpretan estos valores?</strong></p>
+</section>
+</section>
+<section id="box-plot" class="level1">
+<h1>Box-Plot</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:MASS':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    last_plot</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">y =</span> pesos, <span class="at">type =</span> <span class="st">"box"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fig  <span class="do">##Vertical</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-797174d42c8554ea502d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-797174d42c8554ea502d">{"x":{"visdat":{"1766765f06f6":["function () ","plotlyVisDat"]},"cur_data":"1766765f06f6","attrs":{"1766765f06f6":{"y":[303.37,301.01999999999998,292.24000000000001,300.30000000000001,299.94,291.24000000000001,297.93000000000001,306.81,303.49000000000001,302.12,292.81999999999999,297.88999999999999,296.83999999999997,301.08999999999997,303.94999999999999,289.44,296.99000000000001,310.30000000000001,296.80000000000001,302.5,305.99000000000001,301.16000000000003,305.52999999999997,305.01999999999998,303.20999999999998,310.31999999999999,294.25,299.62,306.26999999999998,293.37],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","y":[303.37,301.01999999999998,292.24000000000001,300.30000000000001,299.94,291.24000000000001,297.93000000000001,306.81,303.49000000000001,302.12,292.81999999999999,297.88999999999999,296.83999999999997,301.08999999999997,303.94999999999999,289.44,296.99000000000001,310.30000000000001,296.80000000000001,302.5,305.99000000000001,301.16000000000003,305.52999999999997,305.01999999999998,303.20999999999998,310.31999999999999,294.25,299.62,306.26999999999998,293.37],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig_1 <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">x =</span> pesos, <span class="at">type =</span> <span class="st">"box"</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#fig_1 ##Horizontal</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>fig_1 <span class="ot">&lt;-</span> fig_1 <span class="sc">%&gt;%</span> <span class="fu">add_boxplot</span>(<span class="at">x =</span> pesos, <span class="at">jitter =</span> <span class="fl">0.3</span>, <span class="at">pointpos =</span> <span class="sc">-</span><span class="fl">1.8</span>, <span class="at">boxpoints =</span> <span class="st">'all'</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'rgb(7,40,89)'</span>),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'rgb(7,40,89)'</span>),</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">name =</span> <span class="st">"All Points"</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>fig_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-adbe390d68a56398b42f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-adbe390d68a56398b42f">{"x":{"visdat":{"176658c23d30":["function () ","plotlyVisDat"]},"cur_data":"176658c23d30","attrs":{"176658c23d30":{"x":[303.37,301.01999999999998,292.24000000000001,300.30000000000001,299.94,291.24000000000001,297.93000000000001,306.81,303.49000000000001,302.12,292.81999999999999,297.88999999999999,296.83999999999997,301.08999999999997,303.94999999999999,289.44,296.99000000000001,310.30000000000001,296.80000000000001,302.5,305.99000000000001,301.16000000000003,305.52999999999997,305.01999999999998,303.20999999999998,310.31999999999999,294.25,299.62,306.26999999999998,293.37],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"},"176658c23d30.1":{"x":[303.37,301.01999999999998,292.24000000000001,300.30000000000001,299.94,291.24000000000001,297.93000000000001,306.81,303.49000000000001,302.12,292.81999999999999,297.88999999999999,296.83999999999997,301.08999999999997,303.94999999999999,289.44,296.99000000000001,310.30000000000001,296.80000000000001,302.5,305.99000000000001,301.16000000000003,305.52999999999997,305.01999999999998,303.20999999999998,310.31999999999999,294.25,299.62,306.26999999999998,293.37],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box","jitter":0.29999999999999999,"pointpos":-1.8,"boxpoints":"all","marker":{"color":"rgb(7,40,89)"},"line":{"color":"rgb(7,40,89)"},"name":"All Points","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","x":[303.37,301.01999999999998,292.24000000000001,300.30000000000001,299.94,291.24000000000001,297.93000000000001,306.81,303.49000000000001,302.12,292.81999999999999,297.88999999999999,296.83999999999997,301.08999999999997,303.94999999999999,289.44,296.99000000000001,310.30000000000001,296.80000000000001,302.5,305.99000000000001,301.16000000000003,305.52999999999997,305.01999999999998,303.20999999999998,310.31999999999999,294.25,299.62,306.26999999999998,293.37],"type":"box","orientation":"h","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(255,127,14,0.5)","x":[303.37,301.01999999999998,292.24000000000001,300.30000000000001,299.94,291.24000000000001,297.93000000000001,306.81,303.49000000000001,302.12,292.81999999999999,297.88999999999999,296.83999999999997,301.08999999999997,303.94999999999999,289.44,296.99000000000001,310.30000000000001,296.80000000000001,302.5,305.99000000000001,301.16000000000003,305.52999999999997,305.01999999999998,303.20999999999998,310.31999999999999,294.25,299.62,306.26999999999998,293.37],"type":"box","jitter":0.29999999999999999,"pointpos":-1.8,"boxpoints":"all","marker":{"color":"rgb(7,40,89)","line":{"color":"rgba(255,127,14,1)"}},"line":{"color":"rgb(7,40,89)"},"name":"All Points","orientation":"h","xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(pesos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/Boxplot-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(pesos,<span class="at">horizontal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Descriptiva_files/figure-html/Boxplot-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>BaseEjemplo <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/sergiocalderon/Documents/GitHub/EstadisticaParaGeografos/EstadisticaParaGeografosUN/Estadistica_Descriptiva/BaseEjemplo.xlsx"</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>fig_gasto <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">y =</span> BaseEjemplo<span class="sc">$</span>gastosemanal, <span class="at">type =</span> <span class="st">"box"</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>fig_gasto <span class="ot">&lt;-</span> fig_gasto <span class="sc">%&gt;%</span> <span class="fu">add_boxplot</span>(<span class="at">y =</span> BaseEjemplo<span class="sc">$</span>gastosemanal, <span class="at">jitter =</span> <span class="fl">0.3</span>, <span class="at">pointpos =</span> <span class="sc">-</span><span class="fl">1.8</span>, <span class="at">boxpoints =</span> <span class="st">'all'</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'rgb(7,40,89)'</span>),</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'rgb(7,40,89)'</span>),</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">name =</span> <span class="st">"All Points"</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>fig_gasto</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8cefbf9a06fad5bf45b9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8cefbf9a06fad5bf45b9">{"x":{"visdat":{"17663e232923":["function () ","plotlyVisDat"]},"cur_data":"17663e232923","attrs":{"17663e232923":{"y":[120000,50000,50000,55000,50000,125000,60000,520000,90000,60000,20000,45000,100000,60000,80000,90000,60000,40000,90000,60000,40000,50000,20000,70000,20000,12000,12000,16000,50000,20000,60000,50000,100000],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"},"17663e232923.1":{"y":[120000,50000,50000,55000,50000,125000,60000,520000,90000,60000,20000,45000,100000,60000,80000,90000,60000,40000,90000,60000,40000,50000,20000,70000,20000,12000,12000,16000,50000,20000,60000,50000,100000],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box","jitter":0.29999999999999999,"pointpos":-1.8,"boxpoints":"all","marker":{"color":"rgb(7,40,89)"},"line":{"color":"rgb(7,40,89)"},"name":"All Points","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","y":[120000,50000,50000,55000,50000,125000,60000,520000,90000,60000,20000,45000,100000,60000,80000,90000,60000,40000,90000,60000,40000,50000,20000,70000,20000,12000,12000,16000,50000,20000,60000,50000,100000],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(255,127,14,0.5)","y":[120000,50000,50000,55000,50000,125000,60000,520000,90000,60000,20000,45000,100000,60000,80000,90000,60000,40000,90000,60000,40000,50000,20000,70000,20000,12000,12000,16000,50000,20000,60000,50000,100000],"type":"box","jitter":0.29999999999999999,"pointpos":-1.8,"boxpoints":"all","marker":{"color":"rgb(7,40,89)","line":{"color":"rgba(255,127,14,1)"}},"line":{"color":"rgb(7,40,89)"},"name":"All Points","xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="medidas-de-dispersión-o-variabilidad-asimetría-y-sesgo" class="level1">
+<h1>Medidas de dispersión o variabilidad, asimetría y sesgo</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjstats)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>sjstats<span class="sc">::</span><span class="fu">cv</span>(pesos) <span class="do">##Coeficiente de variación es útil, cuando la variable es la misma, pero es hecha en unidades diferentes.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01817416</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(pesos) <span class="do">###Desviación estándar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.459409</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(pesos)<span class="sc">^</span><span class="dv">2</span> <span class="do">###Varianza</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.80514</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(pesos)<span class="sc">-</span><span class="fu">min</span>(pesos) <span class="do">##Rango</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20.88</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(pesos) <span class="do">###Asimetría</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1795275</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(pesos)<span class="do">###Coeficiente de apuntamiento o curtosis, permite ver si tiene colas mas pesadas que la de la distribución normal(el cual es 3 de forma teórica)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.341339</code></pre>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
