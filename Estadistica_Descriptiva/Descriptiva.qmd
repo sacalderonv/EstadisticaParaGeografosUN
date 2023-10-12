@@ -230,7 +230,9 @@ Asociado con el diagrama de existe una medida de asociación **Lineal** entre la
 
 $$r = \frac{\text{cov}(X, Y)}{s_X \times s_Y}$$ donde $$\text{cov}(X, Y) = \frac{\sum_{i=1}^n (x_i - \bar{X})(y_i - \bar{Y})}{n-1}$$ miesntras que:
 
-$$s_X = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{X})^2}{n-1}}$$ $$s_Y= \sqrt{\frac{\sum_{i=1}^n (y_i - \bar{Y})^2}{n-1}}$$ Si el coeficiente de correlación $r\approx 0$ diremos que no hay asociación estadística lineal.
+$$s_X = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{X})^2}{n-1}}$$ $$s_Y= \sqrt{\frac{\sum_{i=1}^n (y_i - \bar{Y})^2}{n-1}}$$ 
+
+Si el coeficiente de correlación $r\approx 0$ diremos que no hay asociación estadística lineal.
 
 Si el coeficiente de correlación $r\approx 1$ diremos que hay asociación estadística lineal directa.
 
@@ -257,7 +259,7 @@ a=1
 b=2
 x_simul<-rnorm(long,0,1)
 y_simul<-a+b*x_simul+rnorm(long,0,1)
-plot(x_simul,y_simul,pch=20)
+plot(x_simul,y_simul,pch=20,main="Relación Lineal")
 cor(x_simul,y_simul)
 
 ###Relación Cuadrática
@@ -265,10 +267,10 @@ cor(x_simul,y_simul)
 
 long=100
 a=1
-b=2
+b=4
 x_simul<-rnorm(long,0,1)
-y_simul<-a+b*x_simul^2+rnorm(long,0,1)
-plot(x_simul,y_simul,pch=20)
+y_simul<-a-b*x_simul^2+rnorm(long,0,1)
+plot(x_simul,y_simul,pch=20,main="Relación Cuadrática")
 cor(x_simul,y_simul)
 
 
@@ -280,7 +282,7 @@ a=1
 b=2
 x_simul<-rnorm(long,0,1)
 y_simul<-a+b*x_simul+c*x_simul^2+d*x_simul^3+rnorm(long,0,1)
-plot(x_simul,y_simul,pch=20)
+plot(x_simul,y_simul,pch=20,main="Relación Polinomial")
 cor(x_simul,y_simul)
 
 #####Relación exponencial
@@ -290,7 +292,7 @@ a=1
 b=5
 x_simul<-rnorm(long,0,1)
 y_simul<-a+exp(-b*x_simul)+rnorm(long,0,1)
-plot(x_simul,y_simul,pch=20)
+plot(x_simul,y_simul,pch=20,main="Relación Exponencial")
 cor(x_simul,y_simul)
 
 
@@ -301,7 +303,7 @@ a=1
 b=2
 x_simul<-rnorm(long,0,1)
 y_simul<-a+sin(2*pi*x_simul/b)+rnorm(long,0,1)
-plot(x_simul,y_simul,pch=20)
+plot(x_simul,y_simul,pch=20,main="Relación Sinusoidal")
 cor(x_simul,y_simul)
 
 
@@ -312,7 +314,7 @@ a=1
 
 x_simul<-rnorm(long,0,1)
 y_simul<-a +rnorm(long,0,1)
-plot(x_simul,y_simul,pch=20)
+plot(x_simul,y_simul,pch=20,main="No Relación")
 cor(x_simul,y_simul)
 
 
@@ -343,4 +345,4 @@ table(Base_ejemplo%>%select(Genero,marcacel))
 cramerV(Base_ejemplo$Genero, Base_ejemplo$marcacel, bias.correct = FALSE)
 ```
 
-Qué otras medidas hay para datos categóricos?
+Qué otras medidas hay para la asociación de datos categóricos?
