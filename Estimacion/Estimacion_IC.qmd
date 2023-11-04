@@ -12,23 +12,136 @@ $$
 (\bar{x} \pm t_{1-\alpha/2;n-1}\frac{s}{\sqrt{n}})
 $$
 
-## Running Code
+Para construir intervalos de confianza para una muestra de la población se puede usar la función t.test del paquete base o del paquete OneTwoSamples. Para el paquete OneTwoSamples ver <https://cran.r-project.org/web/packages/OneTwoSamples/vignettes/OneTwoSamples.pdf>
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+Primero exploremos si la distribución luce como la normal mediante los gráficos así como un gráfico adicional que el el gráfico de cuantiles o qqplot.
 
 ```{r intervalos}
+library(readxl)
+library(EnvStats)
+library(car)
 Pesos_Alturas_Diametros <- read_excel("Pesos_Alturas_Diametros.xlsx")
 
 hist(Pesos_Alturas_Diametros$Pesos)
 boxplot(Pesos_Alturas_Diametros$Pesos)
 mean(Pesos_Alturas_Diametros$Pesos)
 sd(Pesos_Alturas_Diametros$Pesos)
+
+qqnorm(Pesos_Alturas_Diametros$Pesos, pch = 1, frame = FALSE)
+qqline(Pesos_Alturas_Diametros$Pesos, col = "steelblue", lwd = 2)
+
+car::qqPlot(Pesos_Alturas_Diametros$Pesos)
+
+EnvStats::qqPlot(Pesos_Alturas_Diametros$Pesos, add.line = TRUE) ###También permite comparar contra otra distribución que no sea la normal.
+
 ```
+
+Para mas información de qqplot con otras distribuciones con la función EnvStats::qqPlot ver <https://search.r-project.org/CRAN/refmans/EnvStats/html/qqPlot.html>
 
 Vamos a calcular el intervalo de confianza, la función *t.test* realiza el intervalo de confianza para la media de una población normal
 
-```{r intervalo}
-t.test(Pesos_Alturas_Diametros$Pesos,var.equal =FALSE,conf.level = 0.95 )
+```{r ic mu varianza desconocida}
+library(OneTwoSamples)
+t.test(Pesos_Alturas_Diametros$Pesos,var.equal =FALSE,conf.level = 0.95 ) ##Varianza conocida###
+salida_IC<-OneTwoSamples::interval_estimate1(Pesos_Alturas_Diametros$Pesos,sigma=-1,alpha=0.05)###sigma=-1 quiere decir que la varianza es desconocida.
+salida_IC$a  #límite inferior.
+salida_IC$b  #Límite superior.
 ```
 
-Note que como el argumento **var.equal =FALSE,** se usa la varianza muestral para calcular la estadística, y eso es lo ideal cuando el tamaño de la muestra es puequeño.
+Si se conoce la desviación estándar poblacional $\sigma=3$, entonces se puede especificar ese valor enel argumento *sigma* de la función *OneTwoSamples::interval_estimate1.*
+
+```{r IC mu varianza conocida}
+salida_IC_var_cono<-OneTwoSamples::interval_estimate1(Pesos_Alturas_Diametros$Pesos,sigma=3,alpha=0.05)
+salida_IC_var_cono$a
+salida_IC_var_cono$b
+```
+
+**Intervalos de confianza Unilaterales para la media** $\mu$
+
+Estos intervalos son de la forma
+
+$(-\infty,\bar{X}+t_{1-\alpha;n-1}\frac{S}{n})$
+
+$(\bar{X}-t_{1-\alpha;n-1}\frac{S}{n},\infty)$
+
+```{r IC unilaterales}
+OneTwoSamples::interval_estimate4(Pesos_Alturas_Diametros$Pesos,sigma=-1,side=-1,alpha=0.05) ###Límite Superior
+OneTwoSamples::interval_estimate4(Pesos_Alturas_Diametros$Pesos,sigma=-1,side=1,alpha=0.05) ###Límite inferior
+OneTwoSamples::interval_estimate4(Pesos_Alturas_Diametros$Pesos,sigma=-1,side=0,alpha=0.05) ### Bilateral
+```
+
+También podemos calcular estos intervalos de confianza de forma manual
+
+```{r manual IC}
+xbar=mean(Pesos_Alturas_Diametros$Pesos)
+desv.est=sd(Pesos_Alturas_Diametros$Pesos)
+n=length(Pesos_Alturas_Diametros$Pesos)
+alpha=0.01
+cuantilt=qt(1-alpha/2,n-1)
+cuantilz=qnorm(1-alpha/2,0,1)
+cuantilz
+cuantilt
+
+###Usando la t-student.
+linf=xbar-cuantilt*(desv.est/sqrt(n))
+lsup=xbar+cuantilt*(desv.est/sqrt(n))
+linf
+lsup
+
+####Usando la normal
+linf=xbar-cuantilz*(desv.est/sqrt(n))
+lsup=xbar+cuantilz*(desv.est/sqrt(n))
+linf
+lsup
+```
+
+# Intervalo de confianza para la media de una distribución no-normal pero con tamaño de muestra lo suficientemente grande
+
+```{r IC no-normal mu}
+OneTwoSamples::interval_estimate3(Pesos_Alturas_Diametros$Pesos,sigma = -1,alpha = 0.05)
+```
+
+# Intervalo de confianza para la varianza
+
+Un intervalo de confianza del $100(1-\alpha)\%$ para \\sigma\^{2}\$\$ de una población normal viene dado por:
+
+$$
+\left(\frac{(n-1)S^{2}}{\chi^{2}_{(1-\alpha/2,n-1)}};\frac{(n-1)S^{2}}{\chi^{2}_{(\alpha/2,n-1)}}\right).
+$$
+
+```{r varianza normal}
+desv.est=sd(Pesos_Alturas_Diametros$Pesos)
+n=length(Pesos_Alturas_Diametros$Pesos)
+alpha=0.05
+quantilchisq1=qchisq(1-alpha/2,n-1)
+quantilchisq2=qchisq(alpha/2,n-1)
+linfvar=(n-1)*desv.est^2/quantilchisq1
+linfsup=(n-1)*desv.est^2/quantilchisq2
+
+linfvar
+linfsup
+
+interval_var1(Pesos_Alturas_Diametros$Pesos,mu=Inf,alpha=0.05) ##mu=Inf indica que la media poblacional mu es desconocida.
+
+```
+
+# Intervalo de confianza para la proporción para muestras grandes.
+
+Recordemos que un I.C. para la proporción queda establecido de la siguiente manera para muestras grandes:
+
+$$
+\left(\bar{X}_{n}-z_{1-\alpha/2}\sqrt{\frac{\bar{X}_{n}(1-\bar{X}_{n})}{n}}  ; \bar{X}_{n}+z_{1-\alpha/2}\sqrt{\frac{\bar{X}_{n}(1-\bar{X}_{n})}{n}} \right).
+$$
+
+Vamos a calcular un IC para la proporción de de personas que tienen contrato. Es decir usando la columna llamada "EncHog2022\$Contrato_lab" para categoría 1, que corresponde a que tiene contrato laboral. Como tarea realice el mismo ejercicio para la variable "EncHog2022\$Acepta_Presta" que corresponde a si aceptaría o no, otro trabajo que si tuviera prestaciones, donde 1 indica que si aceptaría.
+
+```{r IC proporcion}
+EncHog2022 <- read_excel("EncHog2022.xlsx", 
+     col_types = c("text", "text", "numeric", 
+         "numeric", "text", "numeric", "numeric", 
+         "numeric"))
+
+binom.confint(sum(EncHog2022$Contrato_lab=="1"), length(EncHog2022$Contrato_lab))  ### para la proporción de éxitos, es decir, la proporción de personas que tienen contrato.
+
+binom.confint(c(sum(EncHog2022$Contrato_lab=="1"),sum(EncHog2022$Contrato_lab=="2")), length(EncHog2022$Contrato_lab))### para la proporción de éxitos y fracasos, es decir, la proporción de personas que tienen contrato y las que no tiene contrato. 
+```
