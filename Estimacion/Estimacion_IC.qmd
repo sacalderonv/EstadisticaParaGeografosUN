@@ -103,7 +103,7 @@ OneTwoSamples::interval_estimate3(Pesos_Alturas_Diametros$Pesos,sigma = -1,alpha
 
 # Intervalo de confianza para la varianza
 
-Un intervalo de confianza del $100(1-\alpha)\%$ para \\sigma\^{2}\$\$ de una población normal viene dado por:
+Un intervalo de confianza del $100(1-\alpha)\%$ para $\sigma^{2}$ de una población normal viene dado por:
 
 $$
 \left(\frac{(n-1)S^{2}}{\chi^{2}_{(1-\alpha/2,n-1)}};\frac{(n-1)S^{2}}{\chi^{2}_{(\alpha/2,n-1)}}\right).
@@ -125,6 +125,8 @@ interval_var1(Pesos_Alturas_Diametros$Pesos,mu=Inf,alpha=0.05) ##mu=Inf indica q
 
 ```
 
+Realice como tarea los intervalos de confianza para la varianza de las otras variables
+
 # Intervalo de confianza para la proporción para muestras grandes.
 
 Recordemos que un I.C. para la proporción queda establecido de la siguiente manera para muestras grandes:
@@ -144,4 +146,25 @@ EncHog2022 <- read_excel("EncHog2022.xlsx",
 binom.confint(sum(EncHog2022$Contrato_lab=="1"), length(EncHog2022$Contrato_lab))  ### para la proporción de éxitos, es decir, la proporción de personas que tienen contrato.
 
 binom.confint(c(sum(EncHog2022$Contrato_lab=="1"),sum(EncHog2022$Contrato_lab=="2")), length(EncHog2022$Contrato_lab))### para la proporción de éxitos y fracasos, es decir, la proporción de personas que tienen contrato y las que no tiene contrato. 
+```
+
+A manera de ejercicio use la misma base de datos para estimar con base en un I.C la proporción de personas en los hogares a las uales no les gusta su actual trabajo.
+
+# Intervalos de confianza para dos poblaciones.
+
+## Intervalo de confianza para el cociente de dos varianzas de dos poblaciones normales e independientes.
+
+$$\left( \frac{S_{1}^{2}/S_{2}^{2}}{F_{(1-\alpha/2;n_{1}-1,n_{2}-1)}};\frac{S_{1}^{2}/S_{2}^{2}}{F_{(\alpha/2;n_{1}-1,n_{2}-1)}} \right)$$
+
+## Ejemplo
+
+```{r IC cociente entre dos varianzas}
+Muestra1<-EncHog2022%>%filter(Contrato_lab=="1")%>%select(Gan_Neta)
+Muestra2<-EncHog2022%>%filter(Contrato_lab=="2")%>%select(Gan_Neta)
+
+OneTwoSamples::interval_var2(Muestra1$Gan_Neta,Muestra2$Gan_Neta,mu = c(Inf, Inf),alpha = 0.05)
+
+
+###De forma manual cómo se haría?
+
 ```

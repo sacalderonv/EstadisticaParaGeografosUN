@@ -327,7 +327,7 @@ Se puede usar Tablas cruzadas para explorar relaciones entre variable categóric
 Una medida de la asociación entre variable categóricas es la V de Cramer, la cual mide que tan fuerte es la asociación. Más específicamente es el efecto del tamaño(**ES**) de la prueba de independencia chi-cuadrado(**La cual será vista mas adelante.**).
 
 | **Effect size (ES)** | **Interpretation**                                                                                           |
-|:---------------|:-------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | ES ≤ 0.2             | The result is weak. Although the result is statistically significant, the fields are only weakly associated. |
 | 0.2 \< ES ≤ 0.6      | The result is moderate. The fields are moderately associated.                                                |
 | ES \> 0.6            | The result is strong. The fields are strongly associated.                                                    |
