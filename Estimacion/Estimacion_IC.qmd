@@ -99,6 +99,11 @@ lsup
 
 ```{r IC no-normal mu}
 OneTwoSamples::interval_estimate3(Pesos_Alturas_Diametros$Pesos,sigma = -1,alpha = 0.05)
+qqnorm(EncHog2022$Gan_Neta, pch = 1, frame = FALSE)
+qqline(EncHog2022$Gan_Neta, col = "steelblue", lwd = 2)
+OneTwoSamples::interval_estimate3(EncHog2022$Gan_Neta,sigma = -1,alpha = 0.05)
+
+
 ```
 
 # Intervalo de confianza para la varianza
@@ -120,8 +125,8 @@ linfsup=(n-1)*desv.est^2/quantilchisq2
 
 linfvar
 linfsup
-
-interval_var1(Pesos_Alturas_Diametros$Pesos,mu=Inf,alpha=0.05) ##mu=Inf indica que la media poblacional mu es desconocida.
+OneTwoSamples::interval_var1(Pesos_Alturas_Diametros$Pesos,mu=Inf,alpha=0.05)
+ ##mu=Inf indica que la media poblacional mu es desconocida.
 
 ```
 
@@ -138,17 +143,18 @@ $$
 Vamos a calcular un IC para la proporción de de personas que tienen contrato. Es decir usando la columna llamada "EncHog2022\$Contrato_lab" para categoría 1, que corresponde a que tiene contrato laboral. Como tarea realice el mismo ejercicio para la variable "EncHog2022\$Acepta_Presta" que corresponde a si aceptaría o no, otro trabajo que si tuviera prestaciones, donde 1 indica que si aceptaría.
 
 ```{r IC proporcion}
+library(binom)
 EncHog2022 <- read_excel("EncHog2022.xlsx", 
      col_types = c("text", "text", "numeric", 
          "numeric", "text", "numeric", "numeric", 
          "numeric"))
 
-binom.confint(sum(EncHog2022$Contrato_lab=="1"), length(EncHog2022$Contrato_lab))  ### para la proporción de éxitos, es decir, la proporción de personas que tienen contrato.
+binom.confint(sum(EncHog2022$Contrato_lab=="1"), length(EncHog2022$Contrato_lab),conf.level = 0.95)  ### para la proporción de éxitos, es decir, la proporción de personas que tienen contrato.
 
 binom.confint(c(sum(EncHog2022$Contrato_lab=="1"),sum(EncHog2022$Contrato_lab=="2")), length(EncHog2022$Contrato_lab))### para la proporción de éxitos y fracasos, es decir, la proporción de personas que tienen contrato y las que no tiene contrato. 
 ```
 
-A manera de ejercicio use la misma base de datos para estimar con base en un I.C la proporción de personas en los hogares a las uales no les gusta su actual trabajo.
+A manera de ejercicio use la misma base de datos para estimar con base en un I.C la proporción de personas en los hogares a las uales no les gusta su actual trabajo. Finalmente, use la base de datos \$BaseEjemplo.xsls\$ y realice un IC de confianza para la la proporción de personas en la U.N que usar teléfono Xiaomi. Tenga en cuenta que esta es una muestra de tamaño pequeño, por lo tanto un intervalo asintótico no es muy realista en este caso.
 
 # Intervalos de confianza para dos poblaciones.
 
@@ -166,5 +172,38 @@ OneTwoSamples::interval_var2(Muestra1$Gan_Neta,Muestra2$Gan_Neta,mu = c(Inf, Inf
 
 
 ###De forma manual cómo se haría?
+
+```
+
+# Intervalo de confianza para la diferencia de medias de poblaciones normales e independientes
+
+Antes de construir un IC para la diferencia de medias, debemos verificar si las poblaciones tiene varianzas iguales o no. Cómo lo hacemos? Pues también con un I.C para el cociente entre las dos varianzas!
+
+Sin embargo, un primer paso sería comprobar si los datos de ambas poblaciones proviene de una distribución normal. Ya tenemos estrategias de como hacerlo. Verificarlo!
+
+```{r IC cociente entre dos varianzas indep }
+Fertilizante<-c(1024, 1216, 1312, 1280, 1216, 1312, 992, 1120)
+Control<-c( 1104, 1072, 1088, 1328, 1376, 1280, 1120, 120)
+
+OneTwoSamples::interval_var2(Fertilizante,Control,mu = c(Inf, Inf),alpha = 0.05)
+
+var.test(Fertilizante,Control,conf.level = 0.95) 
+```
+
+Note que el I.C del 95% para $\sigma_1^2/\sigma_2^2$ es $(0.01994435; 0.49759399)$, lo cual, dado que no contiene al 1, podría decidir con esa confianza, que las varianzas poblaciones no son iguales. Lo cual requerirá que usemos un intervalo de confianza para la diferencia de medias diferente al que presentamos anteriormente.
+
+```{r IC dif medias pob normales e indep }
+t.test(Fertilizante,Control,var.equal = FALSE,conf.level = 0.95)
+
+OneTwoSamples::interval_estimate5(Fertilizante,Control,sigma=c(-1,-1),var.equal = FALSE,alpha = 0.05)
+```
+
+# Intervalo de confianza para muestras dependientes o por pares
+
+```{r Muestras por pares}
+Fondo<-c(0.430 , 0.266 , 0.567 , 0.531 , 0.707 , 0.716)
+Superficial<-c(0.415 , 0.238 , 0.390 , 0.410 , 0.605 , 0.609)
+dife<-Fondo-Superficial ###Debemos verificar que las diferencias provengan de una distribución normal. Cómo lo hacemos?
+t.test(x = Fondo,y = Superficial,paired = TRUE,conf.level = 0.95)
 
 ```
