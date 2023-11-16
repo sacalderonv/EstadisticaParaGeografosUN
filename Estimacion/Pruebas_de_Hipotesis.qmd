@@ -83,126 +83,112 @@ corresponde a las alturas(en metros) de una muestra de Cipreces de una región m
 
 # Prueba de hipótesis para la media de una distribución no-normal pero con tamaño de muestra lo suficientemente grande
 
-Recuerde que si usted tiene un tamaño de muestra lo suficientemente grande, usted puede hacer una aproximación a la distribución normal, es decir la estadística de prueba es una normal de forma aproximada.
+Recuerde que si usted tiene un tamaño de muestra lo suficientemente grande, usted puede hacer una aproximación a la distribución normal, es decir la estadística de prueba es una normal de forma aproximada. Es decir,
+
+$$
+T=\frac{\bar{X}-\mu_{0}}{S/\sqrt{n}}\sim N(0,1)
+$$
+
+para un tamaño de muestra suficientemente grande. Para eso se requiere probar la hipótesis de si la ganancia neta promedio en las personas dentro de los hogares es inferior al \$500000. Es decir use la variable Gan_Neta. Hágalo de forma manual y use ahora también la función t.test y OneTwoSamples::mean_test1. Note que aunque estas dos funciones usan la t-student para los cuantiles, es bien conocido que los cuantiles de una t-student y los una normal son aproximadamente iguales cuando los grados de libertad son grandes, y esos sucede cuando el tamaño de muestra es suficientementeb grande.
 
 ```{r Prueba de hipótesis no-normal mu}
-OneTwoSamples::interval_estimate3(Pesos_Alturas_Diametros$Pesos,sigma = -1,alpha = 0.05)
-qqnorm(EncHog2022$Gan_Neta, pch = 1, frame = FALSE)
-qqline(EncHog2022$Gan_Neta, col = "steelblue", lwd = 2)
-OneTwoSamples::interval_estimate3(EncHog2022$Gan_Neta,sigma = -1,alpha = 0.05)
 
-
-```
-
-# Intervalo de confianza para la varianza
-
-Un intervalo de confianza del $100(1-\alpha)\%$ para $\sigma^{2}$ de una población normal viene dado por:
-
-$$
-\left(\frac{(n-1)S^{2}}{\chi^{2}_{(1-\alpha/2,n-1)}};\frac{(n-1)S^{2}}{\chi^{2}_{(\alpha/2,n-1)}}\right).
-$$
-
-```{r varianza normal}
-desv.est=sd(Pesos_Alturas_Diametros$Pesos)
-n=length(Pesos_Alturas_Diametros$Pesos)
-alpha=0.05
-quantilchisq1=qchisq(1-alpha/2,n-1)
-quantilchisq2=qchisq(alpha/2,n-1)
-linfvar=(n-1)*desv.est^2/quantilchisq1
-linfsup=(n-1)*desv.est^2/quantilchisq2
-
-linfvar
-linfsup
-OneTwoSamples::interval_var1(Pesos_Alturas_Diametros$Pesos,mu=Inf,alpha=0.05)
- ##mu=Inf indica que la media poblacional mu es desconocida.
-
-```
-
-Realice como tarea los intervalos de confianza para la varianza de las otras variables
-
-# Intervalo de confianza para la proporción para muestras grandes.
-
-Recordemos que un I.C. para la proporción queda establecido de la siguiente manera para muestras grandes:
-
-$$
-\left(\bar{X}_{n}-z_{1-\alpha/2}\sqrt{\frac{\bar{X}_{n}(1-\bar{X}_{n})}{n}}  ; \bar{X}_{n}+z_{1-\alpha/2}\sqrt{\frac{\bar{X}_{n}(1-\bar{X}_{n})}{n}} \right).
-$$
-
-Vamos a calcular un IC para la proporción de de personas que tienen contrato. Es decir usando la columna llamada "EncHog2022\$Contrato_lab" para categoría 1, que corresponde a que tiene contrato laboral. Como tarea realice el mismo ejercicio para la variable "EncHog2022\$Acepta_Presta" que corresponde a si aceptaría o no, otro trabajo que si tuviera prestaciones, donde 1 indica que si aceptaría.
-
-```{r IC proporcion}
-library(binom)
-EncHog2022 <- read_excel("EncHog2022.xlsx", 
+EncHog2022 <- read_excel("Documents/GitHub/EstadisticaParaGeografos/EstadisticaParaGeografosUN/Estadistica_Descriptiva/EncHog2022.xlsx", 
      col_types = c("text", "text", "numeric", 
          "numeric", "text", "numeric", "numeric", 
          "numeric"))
 
-binom.confint(sum(EncHog2022$Contrato_lab=="1"), length(EncHog2022$Contrato_lab),conf.level = 0.95)  ### para la proporción de éxitos, es decir, la proporción de personas que tienen contrato.
-
-binom.confint(c(sum(EncHog2022$Contrato_lab=="1"),sum(EncHog2022$Contrato_lab=="2")), length(EncHog2022$Contrato_lab))### para la proporción de éxitos y fracasos, es decir, la proporción de personas que tienen contrato y las que no tiene contrato. 
+EncHog2022$Gan_Neta
 ```
 
-A manera de ejercicio use la misma base de datos para estimar con base en un I.C la proporción de personas en los hogares a las uales no les gusta su actual trabajo. Finalmente, use la base de datos \$BaseEjemplo.xsls\$ y realice un IC de confianza para la la proporción de personas en la U.N que usar teléfono Xiaomi. Tenga en cuenta que esta es una muestra de tamaño pequeño, por lo tanto un intervalo asintótico no es muy realista en este caso.
+# Prueba de Hipótesis para la varianza de una distribución normal.
 
-```{r IC proporción muestras pequeñas}
-BaseEjemplo
+Se desea probar la hipótesis $H_{0}:\sigma^{2}=\sigma_{0}^{2}\  \  v.s.$
 
-binom.confint(sum(BaseEjemplo$Genero=="f"), length(BaseEjemplo$Genero),conf.level = 0.95)
-binom.confint(sum(BaseEjemplo$marcacel=="samsung"), length(BaseEjemplo$marcacel),conf.level = 0.95)
+$$
+H_{a}:
+\begin{cases}
+    \sigma^{2}>\sigma_{0}^{2}\\
+    \sigma^{2}<\sigma_{0}^{2}\\
+    \sigma^{2}\ne\sigma_{0}^{2}
+\end{cases},
+$$
+
+el estadístico de prueba bajo la hipótesis nula es
+
+$$
+X^{2}=\frac{(n-1)S^{2}}{\sigma^{2}_{0}}
+$$
+
+tiene distribución $\chi^{2}$ con $n-1$ grados de libertad.
+
+**Región de rechazo o regla de decisión:** fijado un nivel de significancia de $\alpha$, tenemos que la región de rechazo para cada hipótesis alternativa es
+
+$$
+\text{Región de rechazo:}
+\begin{cases}
+    x^{2}>\chi^{2}_{(1-\alpha;n-1)}&\text{RR de la cola superior}\\
+    x^{2}<\chi^{2}_{(\alpha;n-1)}&\text{RR de la cola inferior}\\
+    x^{2}>\chi^{2}_{(1-\alpha/2;n-1)}\  \text{o}\  x^{2}<\chi^{2}_{(\alpha/2;n-1)} &\text{RR de dos colas}
+\end{cases}
+$$
+
+Use los datos en el archivo "Pesos_Alturas_Diametros.xlsx" y use la variable pesos, y haga una prueba estadística para probar si la varianza poblacional de los pesos diferente a 30. Haga de forma manual la prueba. Luego, use las funciones OneTwoSamples::var_test1() y EnvStats::varTest. Que puede usted decir?
+
+```{r varianza normal}
+Pesos_Alturas_Diametros$Pesos
+sd(Pesos_Alturas_Diametros$Pesos). ##Calcula la desviación estándar.
+```
+
+**Realice como tarea las pruebas de hipótesis para la varianza de las otras variables**
+
+# Pruebas de Normalidad
+
+En la práctica, unos de los supuestos que hemos hecho para hacer pruebas de hipótesis y crear intervalo de confianza, y que hasta ahora hemos comprobado sólo de forma descriptiva, ha sido el supuesto de que nuestras observaciones provienen de la distribución normal. Sin embargo existen muchas pruebas estadística para verificar nuestros datos en verdad vienen de una distribución normal, como por ejemplo:
+
+	
+
+-   Shapiro-Wilk
+
+-   Lilliefors test
+
+-   Anderson--Darling test
+
+-   Kolmogorov-Smirnov(Para otras distribuciones también aplica)
+
+		
+
+	
+
+En este caso se desea probar **H_0**: Los datos provienen de una distribución Normal v.s.
+
+**H_a**:Los datos no provienen de una distribución Normal.
+
+```{r normalidad}
+library(nortest)
+library(dgof)
+shapiro.test(Pesos_Alturas_Diametros$Pesos)
+shapiro.test(EncHog2022$Gan_Neta) ##Note que no se puede correr porque sólo funciona para tamaños de muestra  entre 3 y 500.
+nortest::lillie.test(EncHog2022$Gan_Neta)
+nortest::ad.test(EncHog2022$Gan_Neta)
+dgof::ks.test(EncHog2022$Gan_Neta,"pnorm")
 
 ```
 
-# Intervalos de confianza para dos poblaciones.
+# Prueba de Hipótesis para la proporción para muestras grandes.
 
-## Intervalo de confianza para el cociente de dos varianzas de dos poblaciones normales e independientes.
+Vamos a ver como hacer una prueba de hipótesis para la proporción de una distribución Bernoulli.
 
-$$\left( \frac{S_{1}^{2}/S_{2}^{2}}{F_{(1-\alpha/2;n_{1}-1,n_{2}-1)}};\frac{S_{1}^{2}/S_{2}^{2}}{F_{(\alpha/2;n_{1}-1,n_{2}-1)}} \right)$$
+Considere que tenemos una muestra de tamaño $n$ de una distribución Bernoulli de parámetro $p$. La hipótesis a probar $H_{0}:p=p_{0}\ \ v.s.$
 
-## Ejemplo
+$$
+	H_{a}:	\begin{cases}		H_{a}:p>p_{0}&\text{Prueba unilateral}\\		H_{a}:p<p_{0}&\text{Prueba unilateral}\\		H_{a}:p\ne p_{0}&\text{Prueba bilateral}\\	\end{cases}
+$$
 
-```{r IC cociente entre dos varianzas}
-Muestra1<-EncHog2022%>%filter(Contrato_lab=="1")%>%select(Gan_Neta)
-Muestra2<-EncHog2022%>%filter(Contrato_lab=="2")%>%select(Gan_Neta)
+el estadístico de prueba $$Z=\frac{\hat{p}-p_{0}}{\sqrt{p_{0}(1-p_{0})/n}}$$
 
-OneTwoSamples::interval_var2(Muestra1$Gan_Neta,Muestra2$Gan_Neta,mu = c(Inf, Inf),alpha = 0.05)
+tiene distribución aproximada $N(0,1)$ siempre que \$ np\_{0}\\geq 10\$ y \$ n(1-p\_{0})\\geq 10.\$
 
+Vamos a hacer una prueba de hipótesis para la proporción de de personas que tienen contrato. Es decir usando la columna llamada "EncHog2022\$Contrato_lab" para categoría 1, que corresponde a que tiene contrato laboral. La idea sería probar si la proporción poblacional $p$ de personas con contrato es superior a 0.7.
 
-###De forma manual cómo se haría?
-
-```
-
-# Intervalo de confianza para la diferencia de medias de poblaciones normales e independientes
-
-Antes de construir un IC para la diferencia de medias, debemos verificar si las poblaciones tiene varianzas iguales o no. Cómo lo hacemos? Pues también con un I.C para el cociente entre las dos varianzas!
-
-Sin embargo, un primer paso sería comprobar si los datos de ambas poblaciones proviene de una distribución normal. Ya tenemos estrategias de como hacerlo. Verificarlo!
-
-```{r IC cociente entre dos varianzas indep }
-Fertilizante<-c(1024, 1216, 1312, 1280, 1216, 1312, 992, 1120)
-Control<-c( 1104, 1072, 1088, 1328, 1376, 1280, 1120, 1200)
-
-qqnorm(Fertilizante, pch = 1, frame = FALSE)
-qqline(Fertilizante, col = "steelblue", lwd = 2)
-
-OneTwoSamples::interval_var2(Fertilizante,Control,mu = c(Inf, Inf),alpha = 0.05)
-
-var.test(Fertilizante,Control,conf.level = 0.95) 
-```
-
-Note que el I.C del 95% para $\sigma_1^2/\sigma_2^2$ es $(0.01994435; 0.49759399)$, lo cual, dado que no contiene al 1, podría decidir con esa confianza, que las varianzas poblaciones no son iguales. Lo cual requerirá que usemos un intervalo de confianza para la diferencia de medias diferente al que presentamos anteriormente.
-
-```{r IC dif medias pob normales e indep }
-t.test(Fertilizante,Control,var.equal = TRUE,conf.level = 0.95)
-
-OneTwoSamples::interval_estimate5(Fertilizante,Control,sigma=c(-1,-1),var.equal = TRUE,alpha = 0.05)
-```
-
-# Intervalo de confianza para muestras dependientes o por pares
-
-```{r Muestras por pares}
-Fondo<-c(0.430 , 0.266 , 0.567 , 0.531 , 0.707 , 0.716)
-Superficial<-c(0.415 , 0.238 , 0.390 , 0.410 , 0.605 , 0.609)
-dife<-Fondo-Superficial ###Debemos verificar que las diferencias provengan de una distribución normal. Cómo lo hacemos?
-t.test(x = Fondo,y = Superficial,paired = TRUE,conf.level = 0.95)
-
-```
+Como tarea realice el mismo ejercicio para la variable "EncHog2022\$Acepta_Presta" que corresponde a si aceptaría o no, otro trabajo que si tuviera prestaciones, donde 1 indica que si aceptaría.
