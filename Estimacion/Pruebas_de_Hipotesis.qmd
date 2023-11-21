@@ -63,7 +63,7 @@ OneTwoSamples::mean_test1(Porc_Grasa_Corp,mu = 12,sigma = -1,side =1 )
 
 Note que como el valor $p=0.02191$ es mas grande que $\alpha=0.01$ no se puede rechazar la hipótesis nula.
 
-**Tarea:** Probar la hipótesis planteda final.
+**Tarea:** Probar la hipótesis planteada final.
 
 Si se conociera la desviación estándar poblacional de los porcentajes de grasa corporal y fueran $\sigma=5.5,$ tendriamos el siguiente escenario:
 
@@ -137,7 +137,8 @@ Use los datos en el archivo "Pesos_Alturas_Diametros.xlsx" y use la variable pes
 
 ```{r varianza normal}
 Pesos_Alturas_Diametros$Pesos
-sd(Pesos_Alturas_Diametros$Pesos). ##Calcula la desviación estándar.
+sd(Pesos_Alturas_Diametros$Pesos) ##Calcula la desviación estándar.
+OneTwoSamples::var_test1(Pesos_Alturas_Diametros$Pesos,sigma2 = 30,side = 0)
 ```
 
 **Realice como tarea las pruebas de hipótesis para la varianza de las otras variables**
@@ -146,8 +147,6 @@ sd(Pesos_Alturas_Diametros$Pesos). ##Calcula la desviación estándar.
 
 En la práctica, unos de los supuestos que hemos hecho para hacer pruebas de hipótesis y crear intervalo de confianza, y que hasta ahora hemos comprobado sólo de forma descriptiva, ha sido el supuesto de que nuestras observaciones provienen de la distribución normal. Sin embargo existen muchas pruebas estadística para verificar nuestros datos en verdad vienen de una distribución normal, como por ejemplo:
 
-	
-
 -   Shapiro-Wilk
 
 -   Lilliefors test
@@ -155,10 +154,6 @@ En la práctica, unos de los supuestos que hemos hecho para hacer pruebas de hip
 -   Anderson--Darling test
 
 -   Kolmogorov-Smirnov(Para otras distribuciones también aplica)
-
-		
-
-	
 
 En este caso se desea probar **H_0**: Los datos provienen de una distribución Normal v.s.
 
@@ -182,13 +177,148 @@ Vamos a ver como hacer una prueba de hipótesis para la proporción de una distr
 Considere que tenemos una muestra de tamaño $n$ de una distribución Bernoulli de parámetro $p$. La hipótesis a probar $H_{0}:p=p_{0}\ \ v.s.$
 
 $$
-	H_{a}:	\begin{cases}		H_{a}:p>p_{0}&\text{Prueba unilateral}\\		H_{a}:p<p_{0}&\text{Prueba unilateral}\\		H_{a}:p\ne p_{0}&\text{Prueba bilateral}\\	\end{cases}
+    H_{a}:  \begin{cases}       H_{a}:p>p_{0}&\text{Prueba unilateral}\\        H_{a}:p<p_{0}&\text{Prueba unilateral}\\        H_{a}:p\ne p_{0}&\text{Prueba bilateral}\\  \end{cases}
 $$
 
 el estadístico de prueba $$Z=\frac{\hat{p}-p_{0}}{\sqrt{p_{0}(1-p_{0})/n}}$$
 
 tiene distribución aproximada $N(0,1)$ siempre que \$ np\_{0}\\geq 10\$ y \$ n(1-p\_{0})\\geq 10.\$
 
-Vamos a hacer una prueba de hipótesis para la proporción de de personas que tienen contrato. Es decir usando la columna llamada "EncHog2022\$Contrato_lab" para categoría 1, que corresponde a que tiene contrato laboral. La idea sería probar si la proporción poblacional $p$ de personas con contrato es superior a 0.7.
+Vamos a hacer una prueba de hipótesis para la proporción de personas que tienen contrato. Es decir usando la columna llamada "EncHog2022\$Contrato_lab" para categoría 1, que corresponde a que tiene contrato laboral. La idea sería probar si la proporción poblacional $p$ de personas con contrato es superior a 0.7.
+
+```{r Prueba de hipótesis para la proporción}
+library(dplyr)
+n_muestra=length(EncHog2022$Contrato_lab) ###Total de observaciones
+
+num_lab_1=length(which(EncHog2022$Contrato_lab==1))
+
+
+binom.test(x=num_lab_1, n=n_muestra, p = 0.7, alternative = "greater")
+prop.test(x=num_lab_1,n=n_muestra,p=0.7,alternative = "greater")
+```
+
+Realice otra prueba de hipótesis pero ahora para probar si la proporción de los que no tienen trabajo es inferior a 0.30.
 
 Como tarea realice el mismo ejercicio para la variable "EncHog2022\$Acepta_Presta" que corresponde a si aceptaría o no, otro trabajo que si tuviera prestaciones, donde 1 indica que si aceptaría.
+
+# Prueba de hipótesis para la igualdad de varianzas
+
+Considere dos muestras de poblaciones normales e independientes de tamaño $n_{1}$ y $n_{2}$. Se dese probar la siguiente hipótesis $H_{0}:\sigma^{2}_{1}=\sigma^{2}_{2}$ v.s. $$
+    H_{a}:
+    \begin{cases}
+        \sigma^{2}_{1}>\sigma^{2}_{2}&\text{prueba a una cola}\\
+        \sigma^{2}_{1}<\sigma^{2}_{2}&\text{prueba a una cola}\\
+        \sigma^{2}_{1}\ne\sigma^{2}_{2}&\text{prueba a dos colas}\\
+    \end{cases}
+    $$ El estadístico de prueba bajo la hipótesis nula es $$F=\frac{S_{1}^{2}}{S_{2}^{2}}$$ tiene distribución $F_{(n_{1}-1,n_{2}-1)}$.
+
+$$
+\textbf{Región de rechazo:}
+\begin{cases}
+    f>F_{(n_{1}-1,n_{2}-1;1-\alpha)}&\text{Prueba a una cola}\\
+    f<F_{(n_{1}-1,n_{2}-1;\alpha)}&\text{Prueba a una cola}\\
+    f>F_{(n_{1}-1,n_{2}-1;1-\alpha/2)}\  \text{o}\  f<F_{(n_{1}-1,n_{2}-1;\alpha/2)}&\text{Prueba a una cola}\\
+\end{cases}
+$$Vemos ahora como probar la hipótesis para el cociente entre dos varianzas, para las regiones R1 y R2 del ejemplo de las ceibas para los pesos.Use un nivel de significancia del 5%.
+
+```{r prueba de hipótesis igualdad varianzas}
+Region1<-Pesos_Alturas_Diametros%>%filter(Region=="R1")
+Region2<-Pesos_Alturas_Diametros%>%filter(Region=="R2")
+Region1$Pesos
+Region2$Pesos
+
+var.test(Region1$Pesos,Region2$Pesos,ratio = 1,conf.level = 0.95,alternative = "two.sided")
+OneTwoSamples::var_test2(Region1$Pesos,Region2$Pesos,side=0)
+
+```
+
+**Ejercicio**: Probar ahora la misma hipótesis para las otras dos variables, alturas y diametros usando ahora un nivel de significancia del 1%.
+
+# Prueba de hipótesis para la diferencia de medias de poblaciones normales e independientes
+
+Vamos a suponer que se tienen dos muestras aleatorias e independientes que proviene de una distribuciones normales con varianzas iguales. Los tamaños de muestras son $n_{1}$ y $n_{2}$ respectivamente. Se desea probar la hipótesis $H_{0}:\mu_{1}-\mu_{2}=D_{0}$ v.s.
+
+$$
+    H_{a}:
+    \begin{cases}
+        \mu_{1}-\mu_{2}>D_{0}&\text{Prueba unilateral superior}\\
+        \mu_{1}-\mu_{2}<D_{0}&\text{Prueba unilateral inferior}\\
+        \mu_{1}-\mu_{2}\ne D_{0}&\text{Prueba bilateral}\\
+    \end{cases}         
+$$
+
+el estadístico de prueba $T=\frac{\bar{X}_{1}-\bar{X}_{2}-D_{0}}{S_{p}\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}}$ tiene distribución t-student con $n_{1}+n_{2}-2$ bajo $H_{0}$.
+
+$$
+\text{Región de rechazo:}
+    \begin{cases}
+        t>t_{(1-\alpha;n-1)}& \text{RR unilateral superior}\\
+        t<t_{(\alpha;n-1)}& \text{RR unilateral inferior}\\
+        t>t_{(1-\alpha/2;n-1)} \  \text{o}\  t<t_{(\alpha/2;n-1)} &\text{RR bilateral}
+    \end{cases}
+$$
+
+Veamos ahora si las medias de las poblaciones de pesos para la región 1 es mayor que para la región 2. Ahora con un nivel de significancia del 10%.
+
+```{r Prueba de hipótesis para la diferencia de medias de poblaciones normales e independientes}
+t.test(Region1$Pesos,Region2$Pesos,mu = 0,alternative = "two.sided",var.equal = TRUE)
+OneTwoSamples::mean_test2(Region1$Pesos,Region2$Pesos,var.equal = TRUE,side = 0)
+```
+
+A manera de ejemplo pruebe si la media de las otras variables son menores para región 1 que para la región 2.
+
+# **Prueba de Independencia para Variables Categóricas**
+
+$p_{i.}=\sum_{i}p_{ij}:\text{Probabilidad que un individuo pertenezca a la categoría i}$
+
+del factor 1. $p_{.j}=\sum_{j}p_{ij}:\text{Probabilidad que un individuo pertenezca a la categoría j}$ del factor 2.
+
+La hipótesis nula aquí sería: **la categoría de un individuo con respecto al factor 1 es independiente de la categoría con respecto al factor 2**, es decir $p_{ij}=p_{i.}\cdot p_{.j}$ para cada $(i,j).$
+
+Se debe entrar una tabla de contingencia.
+
+```{r Prueba de independencia de variables categoricas}
+
+chisq.test(table(EncHog2022$Contrato_lab,EncHog2022$Acepta_Presta))
+fisher.test(table(EncHog2022$Contrato_lab,EncHog2022$Acepta_Presta)) ##Para muestras pequeñas
+
+```
+
+# Regresión Lineal y Análisis de Correlación
+
+Se desea conocer si dos variables cuantitativas $\textbf{X,Y}$ están relacionadas de forma lineal.
+
+Es decir, asumimos que cada observación $Y_{i}$ es obtenida mediante el siguiente modelo
+
+$$
+Y_{i}=\beta_{0}+\beta_{1}x_{i}+\epsilon_{i}.
+$$
+
+Adicionalmente, asumimos que la variable independiente $\textbf{X}$ es fija; los errores $\epsilon_{i}$ son variables aleatorias independientes con distribución normal de media cero y varianza $\sigma^{2}$.
+
+La idea principal, sería probar si la pendiente es igual a cero, es decir $\beta_1=0$, ya que de ser así implicaría que no hay relación lineal entre las dos variables. Si existe relación además con el modelo ajustado se podría hacer predicciones de la variable de interés.
+
+Veamos si existe relación entre el peso y la altura de las ceibas.
+
+```{r relacion}
+library(ggplot2)
+str(Pesos_Alturas_Diametros)
+colnames(Pesos_Alturas_Diametros)
+##Diagrama de dispersión
+Pesos_Alturas_Diametros%>%select(Pesos,Alturas)%>%ggplot(aes(x = Alturas, y = Pesos)) +
+  geom_point() +  # Crear puntos para el diagrama de dispersión
+  labs(title = "Diagrama de Dispersión: Pesos vs. Alturas",
+       x = "Pesos",
+       y = "Alturas")
+
+###Ajuste de la Reresión
+Regresion_pesos_alturas<-lm(formula = Pesos~Alturas ,data=Pesos_Alturas_Diametros)
+summary(Regresion_pesos_alturas)
+
+###Correlación
+cor.test(Pesos_Alturas_Diametros$Pesos,Pesos_Alturas_Diametros$Alturas,alternative = "two.sided",conf.level = 0.99)
+
+##Predicción
+new.dat <- data.frame(Alturas=30)
+predict(Regresion_pesos_alturas, newdata =new.dat , interval = 'prediction')
+```
