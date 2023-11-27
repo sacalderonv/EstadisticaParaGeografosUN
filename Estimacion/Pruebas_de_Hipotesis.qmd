@@ -138,7 +138,7 @@ Use los datos en el archivo "Pesos_Alturas_Diametros.xlsx" y use la variable pes
 ```{r varianza normal}
 Pesos_Alturas_Diametros$Pesos
 sd(Pesos_Alturas_Diametros$Pesos) ##Calcula la desviación estándar.
-OneTwoSamples::var_test1(Pesos_Alturas_Diametros$Pesos,sigma2 = 30,side = 0)
+OneTwoSamples::var_test1(Pesos_Alturas_Diametros$Alturas,sigma2 = 20,side = -1)
 ```
 
 **Realice como tarea las pruebas de hipótesis para la varianza de las otras variables**
