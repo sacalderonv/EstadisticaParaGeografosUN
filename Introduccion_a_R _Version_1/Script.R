@@ -18,7 +18,7 @@
 x_num=c(1,3,5,7,9)
 x_num
 y_num<-c(1,3,5,7,9)
-str(x_num) ##Muestra la estructura del objeto de forma compacta.
+str(x_num) ##Muestra la estructura del objeto de forma compacta. str es una función del paquete base de R.
 class(x_num)
 typeof(x_num)
 ##En Rstudio se pueden ver los objetos creados en la ventana derecha arriba por defecto
@@ -186,3 +186,29 @@ tbl_lista|>select(Localidad)
 tbl_lista|>group_by(Localidad)
 Grupos_iris<-tbl_iris|>group_by(Species)
 ##Revise la salida en la ventana de objetos
+
+
+# Importación de datos externos----
+#Dependiendo del tipo de archivo donde tenemos nuestros datos, el cual está externos a R, se require de diferentes funciones 
+#para poder importarlos a R y así poder trabajar con ellos.
+# El formato de texto mas usual en donde tenemos los datos es un archivo de excel con extensión .xlsx, sin embargo podemos
+#tenerlos en diferentes formatos, por ejemplo archivo plano .cvs, .txt, .dat etc u otro formato que provenga de un ciertos tipos de programas
+#SAS, SPSS etc.
+
+# La forma mas fácil de hacerlo es mediante la herramienta de importación de Rstudio que se accede por 
+# medio File>>Import Dataset>> y se selecciona le tipo de archivo que tenemos.
+
+
+# Vamos a importar un archivo que se encunetra en el repositorio llamado Pesos_Alturas_Diametros.xlsx que se encuentra en la carpeta 
+##Estadística descriptiva. En mi caso me genera el siguiente código y un objeto en R llamado Pesos_Alturas_Diametros, el cual tiene
+## mi datos importados cpon la estructura que necesito.
+### library(readxl)
+### Pesos_Alturas_Diametros <- read_excel("Documents/GitHub/EstadisticaParaGeografosUN/Estadistica_Descriptiva/Pesos_Alturas_Diametros.xlsx")
+
+Pesos_Alturas_Diametros
+
+# Con este objeto podemos trabajar tal cual lo hemos hecho con los objetos creados directamente desde R.
+
+##Tarea: prácticar lo visto en clase con el objeto importado Pesos_Alturas_Diametros, tenga en cunta de primero verificar 
+#que tipo de objeto es. 
+

@@ -10,7 +10,7 @@ Este es un documento de R Markdown. El cual similar al de R Markdown pero con al
 
 ## Objetos de R
 
-En R existen diferentes tipos de objetos, y dependiendo de las necesidades se hace importanteaprender a manejarlas. A continuación presentamos los Objetos mas usados. A los objetos se les puede aplicar funciones de R las cuales permiten obtener información de tales objetos o transformarlos.
+En R existen diferentes tipos de objetos, y dependiendo de las necesidades se hace importante aprender a manejarlas. A continuación presentamos los Objetos mas usados. A los objetos se les puede aplicar funciones de R las cuales permiten obtener información de tales objetos o transformarlos.
 
 ### 
 
@@ -129,3 +129,16 @@ Un tibble, o tbl_df, es una reinvención moderna del data.frame, manteniendo el 
 ### Ejemplo
 
 Vamos a crear a data frame con las tres primeras entradas del objeto Lista2, donde cada columna hace referencia a una variable medida a un cierto individuo.
+
+```{r Creacion de listas}
+df_1=data.frame(Nombres=Lista2$nombres,Edad=Lista2$Edad,Localidad=Lista2$Localidad)
+df_1
+class(df_1)
+str(df_1)
+typeof(df_1)
+```
+
+
+Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna ####Tarea:Crear un nuevo dataframe que incluya además de las variables anteriores ###las dos variables adicionales la latitud y longitud.
+
+###Tarea: Crear un data frame con al menos 10 registros, donde cada registro corresponde a \### una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.

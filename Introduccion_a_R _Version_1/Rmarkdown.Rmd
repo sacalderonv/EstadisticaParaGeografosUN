@@ -134,7 +134,7 @@ Un tibble, o tbl_df, es una reinvención moderna del data.frame, manteniendo el 
 
 ### Ejemplo
 
-Vamos a crear a data frame con las tres primeras entradas del objeto Lista2, donde cada columna hace referencia a una variable medida a un cierto individuo.
+Vamos a crear un data frame con las tres primeras entradas del objeto Lista2, donde cada columna hace referencia a una variable medida a un cierto individuo.
 
 ```{r dataframe1}
 df_1=data.frame(Nombres=Lista2$nombres,Edad=Lista2$Edad,Localidad=Lista2$Localidad)
