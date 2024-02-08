@@ -209,6 +209,6 @@ Pesos_Alturas_Diametros
 
 # Con este objeto podemos trabajar tal cual lo hemos hecho con los objetos creados directamente desde R.
 
-##Tarea: prácticar lo visto en clase con el objeto importado Pesos_Alturas_Diametros, tenga en cunta de primero verificar 
+##Tarea: prácticar lo visto en clase con el objeto importado Pesos_Alturas_Diametros, tenga en cuenta de primero verificar 
 #que tipo de objeto es. 
 
