@@ -21,11 +21,14 @@ y_num<-c(1,3,5,7,9)
 str(x_num) ##Muestra la estructura del objeto de forma compacta. str es una función del paquete base de R.
 class(x_num)
 typeof(x_num)
-##En Rstudio se pueden ver los objetos creados en la ventana derecha arriba por defecto
-## También se puede consultar ayuda de las funciones como sigue:
-?class
 
-###También se puede usar la ventana de la derecha
+##Note que todas estas instrucciones uste también las puede dar(ejecutar) desde la consola
+##En Rstudio se pueden ver los objetos creados en la ventana derecha arriba por defecto.
+##También se puede consultar ayuda de las funciones, para saber los argumentos de la función y tmabién como usarlas, de la 
+##siguiente manera:
+?class
+###También se puede usar la ventana de la derecha abajo.
+
 ## Números----
 #Un número es considerado un vector de una dimensión
 num_num<-9.8
@@ -119,8 +122,8 @@ typeof(df_1)
 ### Con base en el dataframe df_1, crear dos nuevas columas con las latitudes y longitudes de la Lista2.
 ###También añadir un registro adicional(Consultar como se hace?)
 
-###Tarea: Crear un data frame con al menos 10 registros, donde cada registro corresponde a
-### una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
+##Tarea:----
+##Crear un data frame con al menos 10 registros, donde cada registro corresponde a \### una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre de la chasa, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
 
 
 ### Accediendo a elementos de un dataframe----
@@ -199,9 +202,10 @@ Grupos_iris<-tbl_iris|>group_by(Species)
 # medio File>>Import Dataset>> y se selecciona le tipo de archivo que tenemos.
 
 
-# Vamos a importar un archivo que se encunetra en el repositorio llamado Pesos_Alturas_Diametros.xlsx que se encuentra en la carpeta 
+# Vamos a importar un archivo que se encuentra en el repositorio llamado Pesos_Alturas_Diametros.xlsx que se encuentra en la carpeta 
 ##Estadística descriptiva. En mi caso me genera el siguiente código y un objeto en R llamado Pesos_Alturas_Diametros, el cual tiene
-## mi datos importados cpon la estructura que necesito.
+## mi datos importados con la estructura que necesito. Vale la pena decir que ustedes debe descargar este archivo en alguna carpeta
+## de el equipo en que estén trabajando.
 ### library(readxl)
 ### Pesos_Alturas_Diametros <- read_excel("Documents/GitHub/EstadisticaParaGeografosUN/Estadistica_Descriptiva/Pesos_Alturas_Diametros.xlsx")
 

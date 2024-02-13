@@ -31,13 +31,15 @@ class(x_num)
 typeof(x_num)
 ```
 
+***Note que todas estas instrucciones uste también las puede dar(ejecutar) desde la consola.***
+
 En Rstudio se pueden ver los objetos creados en la ventana derecha arriba por defecto. También se puede consultar ayuda de las funciones como sigue:
 
 ```{r ayuda}
 ?class
 ```
 
-También se puede usar la ventana de la derecha.
+También se puede usar la ventana de la derecha abajo para las consultas.
 
 ### Números
 
@@ -103,7 +105,7 @@ dim(X_num) ##dim es para matrices.
 
 ### Listas
 
-Las listas son vectores atómicos que permiten tener diversos tipos de datos en cada entrada.
+Las listas son vectores atómicos que permiten tener diversos tipos de datos en cada entrada. Estos objetos permiten guardar información de diverso tipo.
 
 ```{r Listas}
 Lista1<-list("A",c(1,2,3),matrix(c(1,2,3,4),2,2))
@@ -138,7 +140,20 @@ str(df_1)
 typeof(df_1)
 ```
 
+Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna **Tarea**:Crear un nuevo dataframe que incluya además de las variables anteriores las dos variables adicionales la latitud y longitud.
 
-Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna ####Tarea:Crear un nuevo dataframe que incluya además de las variables anteriores ###las dos variables adicionales la latitud y longitud.
+**Tarea:** Crear un data frame con al menos 10 registros, donde cada registro corresponde a una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
 
-###Tarea: Crear un data frame con al menos 10 registros, donde cada registro corresponde a \### una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
+# Accediendo a elementos de un dataframe 
+
+Se puede acceder primariamente a los elementos de un dataframe, es decir, a las columnas de dataframe o variables medidas. Esto se hace análogamente a como se hizo con las listas.
+
+```{r accediendo a un dataframe}
+df_1$Nombres ##Se accede a la variable a columna Nombres
+df_1$Localidad
+
+mean(df_1$Edad)
+sd(df_1$Edad)
+table(df_1$Localidad)
+table(df_1$Localidad,df_1$Nombres). #Tabla de contingencia
+```
