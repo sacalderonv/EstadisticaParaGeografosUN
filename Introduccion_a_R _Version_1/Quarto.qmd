@@ -144,7 +144,7 @@ Cada fila corresponde a un registro de medición de cada variable que está ubic
 
 **Tarea:** Crear un data frame con al menos 10 registros, donde cada registro corresponde a una chasa en donde se registra o mide la ubicación(latitud, longitud), el nombre, el producto principal de venta("golosina", "comida fresca"), y el número de ventas en un periodo del 10 minutos.
 
-# Accediendo a elementos de un dataframe 
+# Accediendo a elementos de un dataframe
 
 Se puede acceder primariamente a los elementos de un dataframe, es decir, a las columnas de dataframe o variables medidas. Esto se hace análogamente a como se hizo con las listas.
 

@@ -17,7 +17,7 @@
 
 x_num=c(1,3,5,7,9)
 x_num
-y_num<-c(1,3,5,7,9)
+y_num<-c(1,3,5,7,8,9,-2,0.25,1)
 str(x_num) ##Muestra la estructura del objeto de forma compacta. str es una función del paquete base de R.
 class(x_num)
 typeof(x_num)
@@ -92,7 +92,7 @@ Lista2$ubicaciones
 Lista2$Localidad
 Lista2$Edad
 
-Lista2[[4]]
+Lista2[[1]]
 ## Data Frames y ahora tibbles====
 ###Los data frames(marcos de datos) son la versión bidimensional de una lista. 
 ###Son, por mucho, la estructura de almacenamiento más útil para el 
