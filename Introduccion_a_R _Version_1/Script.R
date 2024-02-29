@@ -116,6 +116,10 @@ df_1
 class(df_1)
 str(df_1)
 typeof(df_1)
+
+###Note que usted puede crear data frames de forma manual
+df_1_1<-data.frame(nombres=c("Andres","Camila","Pedro","Sandra"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),latitud=c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037), longitud=c(-74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801))
+df_1_1
 ##Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna
 ####Tarea:Crear un nuevo dataframe que incluya además de las variables anteriores
 ###las dos variables adicionales de la Lista2, la latitud y longitud.
