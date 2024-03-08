@@ -82,7 +82,7 @@ class(Lista1)
 typeof(Lista1)
 str(Lista1)
 
-Lista2<-list(nombres=c("Andres","Camila","Pedro","Sandra"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),ubicaciones=matrix(c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037, -74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801),4,2))
+Lista2<-list(nombres=c("Andres","Camila","Pedro","Sandra"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),ubicaciones=matrix(c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037, -74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801),4,2),Sexo=c("H","M","M","H"))
 Lista2
 str(Lista2)
 ##Usted puede acceder a cualquier elemento de la lista como sigue:
@@ -118,8 +118,8 @@ str(df_1)
 typeof(df_1)
 
 ###Note que usted puede crear data frames de forma manual
-df_1_1<-data.frame(nombres=c("Andres","Camila","Pedro","Sandra"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),latitud=c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037), longitud=c(-74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801))
-df_1_1
+df_1_1<-data.frame(nombres=c("Andres","Camila","Pedro","Sandra"),Sexo=c("H","M","M","H"),Edad=c(19,21,18,20),Localidad=c("Teusaquillo","Suba","Chapinero","Kennedy"),latitud=c(4.6188864,4.706369089343199,4.618767017331927,4.632883977507037), longitud=c(-74.1354241, -74.0412070354434, -74.08648338089243, -74.11558088496801))
+df_1_1$Sexo
 ##Cada fila corresponde a un registro de medición de cada variable que está ubicada por columna
 ####Tarea:Crear un nuevo dataframe que incluya además de las variables anteriores
 ###las dos variables adicionales de la Lista2, la latitud y longitud.
@@ -138,10 +138,15 @@ df_1_1
 df_1$Nombres ##Se accede a la variable a columna Nombres
 df_1$Localidad
 
+df_1$Edad
+
+
 mean(df_1$Edad)
 sd(df_1$Edad)
+mean(df_1$Localidad)
+
 table(df_1$Localidad)
-table(df_1$Localidad,df_1$Nombres). #Tabla de contingencia
+table(df_1$Localidad,df_1$Nombres) #Tabla de contingencia
 ## Tibbles ----
 #Los tibbles, como antes se indicó son una evolución del dataframe
 #a estructuras de datos que permitan la manipulación y el análisis de forma
@@ -186,8 +191,8 @@ tbl_lista
 
 ### Ejemplo de Operaciones----
 #### Selección de Variables----
-tbl_lista|>select(nombres)
-tbl_lista|>select(Localidad)
+tbl_lista|>dplyr::select(nombres)
+tbl_lista|>dplyr::select(Localidad)
 
 #### Agrupamientos----
 tbl_lista|>group_by(Localidad)
