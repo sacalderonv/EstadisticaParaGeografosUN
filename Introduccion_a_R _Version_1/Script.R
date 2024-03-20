@@ -219,8 +219,8 @@ Grupos_iris<-tbl_iris|>group_by(Species)
 ### Pesos_Alturas_Diametros <- read_excel("Documents/GitHub/EstadisticaParaGeografosUN/Estadistica_Descriptiva/Pesos_Alturas_Diametros.xlsx")
 
 Pesos_Alturas_Diametros
-
-# Con este objeto podemos trabajar tal cual lo hemos hecho con los objetos creados directamente desde R.
+save(Pesos_Alturas_Diametros,file="Base_de_datos_Proyecto.rds")
+# Con este objeto podemos trabajar tal cual o hemos hecho con los objetos creados directamente desde R.
 
 ##Tarea: prácticar lo visto en clase con el objeto importado Pesos_Alturas_Diametros, tenga en cuenta de primero verificar 
 #que tipo de objeto es. 
