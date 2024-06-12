@@ -35,7 +35,9 @@ ggplot(discreta,aes(num_nidos))+geom_bar()
 library(arm)
 arm::discrete.histogram(discreta$num_nidos)
 
-
+###
+ggplot(Pesos_Alturas_Diametros,aes(Num_Nidos))+geom_bar()
+arm::discrete.histogram(Pesos_Alturas_Diametros$Num_Nidos)
 ```
 
 **Ejercicio:** Use la base en BaseEjemplo.xlsx, y haga el histograma de frecuencias para las V.A's numéricas discretas.
@@ -75,6 +77,9 @@ moda_pesos<-getmode(pesos) ###Moda
 moda_pesos
 
 
+
+media_diametros<-mean(Pesos_Alturas_Diametros$Diametros)
+media_diametros
 ```
 
 ```{r grafica con medidas}
@@ -107,8 +112,11 @@ $$\alpha=F(\eta(\alpha))=F(x_{\alpha})=\int_{-\infty}^{x_{\alpha}}f(y)\cdot dy.$
 Los cuantiles representan son valores que toma la V.A, tal que satisface que ese valor deja un cierta probabilidad acumulada de $\alpha.$
 
 ```{r cuantiles}
-quantile(pesos,probs = c(0.10)) ###Percentil 10
-quantile(pesos,probs = c(0.95))###Percentil 95
+quantile(pesos,probs = c(0.10)) ###Percentil 10 o cuantil 0.10
+quantile(pesos,probs = c(0.95))###Percentil 95 o cuantil 0.95
+
+
+quantile(pesos,probs = c(0.10,0.95,0.75,0.25))
 ```
 
 **Cómo se interpretan estos valores?**
@@ -122,7 +130,7 @@ library(plotly)
 fig <- plot_ly(y = pesos, type = "box")
 fig  ##Vertical
 fig_1 <- plot_ly(x = pesos, type = "box")
-#fig_1 ##Horizontal
+fig_1 ##Horizontal
 
 
 fig_1 <- fig_1 %>% add_boxplot(x = pesos, jitter = 0.3, pointpos = -1.8, boxpoints = 'all',
@@ -170,6 +178,7 @@ kurtosis(pesos)###Coeficiente de apuntamiento o curtosis, permite ver si tiene c
 
 ```{r Comparacion}
 library(plotly)
+library(readxl)
 Base_EncHog2022<-read_excel("EncHog2022.xlsx",col_types = c("text", "text", "numeric", "numeric", "text", "numeric", "numeric", "numeric"))
 str(Base_EncHog2022)
 
@@ -191,7 +200,7 @@ histogram_plot <- plot_ly(data = filtrado_si_contrato_Gan_Neta, x = ~Gan_Neta, t
 histogram_plot
 
 # Crear el boxplot interactivo
-boxplot_plot <- plot_ly(data = filtrado_si_contrato_Gan_Neta, y = ~Gan_Neta, type = "box") %>%
+boxplot_plot <- plot_ly(data = filtrado_si_contrato_Gan_Neta, x = ~Gan_Neta, type = "box") %>%
   layout(title = "Boxplot de Gan_Neta",
          yaxis = list(title = "Gan_Neta"))
 
@@ -244,7 +253,7 @@ cor(Ceibas%>%select(Pesos,Alturas))
 
 **Qué otras medidas de asociación hay? Tarea**
 
-**Ejercicio:** *Use la base EncHog2022.xlsx y relaice un gráfico de dispersión con INGLABO y Horas_Trab_Sem , junto con Gan_Neta para explorara las relaciones, sin filtrar y filtrando por la variable Contrato_lab.*
+**Ejercicio:** *Use la base EncHog2022.xlsx y realice un gráfico de dispersión con INGLABO y Horas_Trab_Sem , junto con Gan_Neta para explorara las relaciones, sin filtrar y filtrando por la variable Contrato_lab.*
 
 **Ejercicios de simulación**
 
@@ -256,7 +265,7 @@ Vamos a experimentar con datos simulados(artificiales) para explorara relaciones
 
 long=100
 a=1
-b=2
+b=-2
 x_simul<-rnorm(long,0,1)
 y_simul<-a+b*x_simul+rnorm(long,0,1)
 plot(x_simul,y_simul,pch=20,main="Relación Lineal")
@@ -274,7 +283,7 @@ plot(x_simul,y_simul,pch=20,main="Relación Cuadrática")
 cor(x_simul,y_simul)
 
 
-#####Relación Polinomial
+#####Relación Polinomial Cúbica
 c=5
 d=2
 long=100
@@ -327,7 +336,7 @@ Se puede usar Tablas cruzadas para explorar relaciones entre variable categóric
 Una medida de la asociación entre variable categóricas es la V de Cramer, la cual mide que tan fuerte es la asociación. Más específicamente es el efecto del tamaño(**ES**) de la prueba de independencia chi-cuadrado(**La cual será vista mas adelante.**).
 
 | **Effect size (ES)** | **Interpretation**                                                                                           |
-|:---------------------|:-------------------------------------------------------------------------------------------------------------|
+|:------------------|:----------------------------------------------------|
 | ES ≤ 0.2             | The result is weak. Although the result is statistically significant, the fields are only weakly associated. |
 | 0.2 \< ES ≤ 0.6      | The result is moderate. The fields are moderately associated.                                                |
 | ES \> 0.6            | The result is strong. The fields are strongly associated.                                                    |
