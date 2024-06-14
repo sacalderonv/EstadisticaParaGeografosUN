@@ -70,7 +70,7 @@ ggplot() +
   theme(panel.background=element_rect(fill="lightblue"))
 
 
-###Departamento cundinamarca por municipios ----
+###Departamento Cundinamarca por municipios ----
 mpioshp <- st_read("MGN_MPIO_POLITICO.shp",quiet=TRUE)
 str(mpioshp)
 
