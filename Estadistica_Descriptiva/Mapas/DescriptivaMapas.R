@@ -17,6 +17,7 @@ Prop_Contrat.2<-Ocupados_ENH%>%group_by(DPTO,P6440)%>%summarise(n=n())%>%
   mutate(freq = n / sum(n))%>%filter(P6440=="2")%>%dplyr::select(DPTO,freq)%>%rename(freq.2="freq")
 
 Media_ING_Prop_Contract<-Media_Ing%>%left_join(Prop_Contrat.1,by=c("DPTO"="DPTO"))%>%left_join(Prop_Contrat.2,by=c("DPTO"="DPTO"))
+
 deptos <- Municipios %>%
   group_by(Departamento,Dep) %>%
   summarise(Irural=sum(Poblacion*Irural)/sum(Poblacion)) %>%

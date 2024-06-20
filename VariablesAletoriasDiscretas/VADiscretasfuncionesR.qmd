@@ -42,6 +42,19 @@ dbinom(0,size = 10,prob =0.4 )+dbinom(1,size = 10,prob =0.4 )+dbinom(2,size = 10
 
 **Tarea:** Cómo se calcularía la probabilidad de hayan entre 3 y 7 árboles de totumo?
 
+# Gráfico de la distribución Binomial
+
+```{r grafico Binomial}
+library(ggfortify)
+ggdistribution(dbinom, seq(0, 10, 1), size = 10, prob = 0.4)
+
+###Otra forma
+x=seq(0,10,1)
+y=dbinom(x,size=10,prob = 0.4)
+plot(x,y,type="h")
+
+```
+
 ## Distribución Poisson
 
 Recordemos como es la distribución de probabilidad de Poisson de parámetro $\lambda$:
@@ -74,4 +87,6 @@ Note que hacer la suma desde $x=0$ hasta $x=45$ es poco práctico.
 x=seq(0,100,1)
 y=dpois(x,lambda=41.8)
 plot(x,y,type="h")
+
+
 ```
