@@ -35,6 +35,53 @@ ggplot(data, aes(x = x, y = pdf)) +
   ggtitle("Función de Densidad de Probabilidad con Área Sombreada")
 
 ```
+```{r Cuantiles}
+mu=5
+sigma=1.5
+x <- seq(mu-5*sigma, mu+5*sigma, length = 1000)
+
+# Calcula la función de densidad de probabilidad (PDF) para la distribución normal estándar
+pdf <- dnorm(x,mean = mu,sd = sigma)
+Quant <- qnorm(c(0.75, 0.9, 0.95,0.99),mean=mu,sd=sigma)
+df_dens <- data.frame(
+  x = x,
+  y = pdf,
+  quantFct = factor(findInterval(x, Quant))
+)
+
+ggplot(
+  data = df_dens
+)+
+  geom_line(
+    aes(
+      x=x,
+      y=y
+    )
+  )+
+  geom_ribbon(
+    aes(
+      x=x, ymin=0, ymax=y, fill = quantFct
+    ),
+    alpha = 0.25
+  )+
+  scale_x_continuous(
+    breaks=Quant
+  )+
+  scale_fill_manual(
+    name = "",
+    values = c("green","yellow","orange","red","white")
+  )+
+  labs(title = "Probability Density")+
+  xlab("Normal")+ylab("Estimated Density")+
+  theme_bw()+
+  theme(
+    axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank(),
+    legend.position = "none"
+  )
+
+```
+
 
 # Densidad Uniforme
 
