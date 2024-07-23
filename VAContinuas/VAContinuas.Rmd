@@ -15,7 +15,7 @@ output:
 library(ggplot2)
 
 # Valor hasta el cual deseas sombrear el área bajo la curva
-valor_limite <- 1
+valor_limite <- 2
 
 # Crea una secuencia de valores para el eje x
 x <- seq(-3, 3, length = 1000)
@@ -35,6 +35,7 @@ ggplot(data, aes(x = x, y = pdf)) +
   ggtitle("Función de Densidad de Probabilidad con Área Sombreada")
 
 ```
+
 ```{r Cuantiles}
 mu=5
 sigma=1.5
@@ -42,7 +43,7 @@ x <- seq(mu-5*sigma, mu+5*sigma, length = 1000)
 
 # Calcula la función de densidad de probabilidad (PDF) para la distribución normal estándar
 pdf <- dnorm(x,mean = mu,sd = sigma)
-Quant <- qnorm(c(0.75, 0.9, 0.95,0.99),mean=mu,sd=sigma)
+Quant <- qnorm(c(0.25, 0.3, 0.40,0.5),mean=mu,sd=sigma) ###Probabilidades acumuladas para los cuantiles
 df_dens <- data.frame(
   x = x,
   y = pdf,
@@ -82,7 +83,6 @@ ggplot(
 
 ```
 
-
 # Densidad Uniforme
 
 Recordemos que la distribución uniforme es como sigue:
@@ -102,7 +102,7 @@ Calculemos $P[Z\leq 2.8].$
 punif(2.8,min=2.5,max=3.5)
 ```
 
-Ahora Calculemos $P[Z\geq 3.3]$.
+Ahora Calculemos $P[Z\geq 3.3]=1-P[Z\leq 3.3]$.
 
 ```{r Uniforme2}
 1-punif(3.3,min=2.5,max=3.5)
@@ -122,7 +122,7 @@ Finalmente, calculemos el cuantil $x_{0.75}$ o el percentil 75.
 qunif(0.75,min=2.5,max=3.5)
 ```
 
-El cuantil $x_{0.75}$ o percentil 75, que es 3.25, es el peso de un niño cualquiera entre 0 y meses tal que supera al $75\%$ de los pesos de otros niños, y equivalentemente, 3.25 es el peso de un niño entre 0 y 3 meses tal que supera al $75\%$ de los niños en ese rango de edad en cuanto al pesos se refiere.
+El cuantil $x_{0.75}$ o percentil 75, que es 3.25, es el peso de un niño cualquiera entre 0 y 3 meses tal que supera al $75\%$ de los pesos de otros niños, y equivalentemente, 3.25 es el peso de un niño entre 0 y 3 meses tal que supera al $75\%$ de los niños en ese rango de edad en cuanto al pesos se refiere.
 
 # Distribución Normal
 
@@ -138,7 +138,7 @@ Si esto es así, diremos que la V.A $X$ tiene distribución normal de media $\mu
 
 Veamos ahora como calcular probabilidades y cuantiles de la distribución normal con base en el ejemplo:
 
-Por estudios de la encuesta nacional de hogares para el año 2022, se conoce que los ingresos promedio de hogares en la región Caribe son de \$ \$ 2.444.312\$, mientras que la desviación estándar es de $\$ 437.824$. De la misma manera, en la región Andina el ingreso promedio es de $\$ 2.790.288$ y su respectiva desviación estándar es de \$\$495.072 \$. Suponga que la V.A. de los ingresos por hogar en ambas regiones tienen distribución normal con los parámetros poblacionales respectivos.\\
+Por estudios de la encuesta nacional de hogares para el año 2022, se conoce que los ingresos promedio de hogares en la región Caribe son de $\$ 2.444.312$, mientras que la desviación estándar es de $\$ 437.824$. De la misma manera, en la región Andina el ingreso promedio es de $\$ 2.790.288$ y su respectiva desviación estándar es de \$\$495.072 \$. Suponga que la V.A. de los ingresos por hogar en ambas regiones tienen distribución normal con los parámetros poblacionales respectivos.\\
 
 ```         
 Sea $X$ la V.A que mide los ingresos por hogares en la región Caribe, mientras $Y$ es la V.A para el caso de la región Andina. Calculemos las probabilidades de los siguientes eventos:
