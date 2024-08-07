@@ -116,13 +116,13 @@ Ahora calculemos la mediana $Z_{0.5}$.
 qunif(0.5,min=2.5,max=3.5)
 ```
 
-Finalmente, calculemos el cuantil $x_{0.75}$ o el percentil 75.
+Finalmente, calculemos el cuantil $z_{0.75}$ o el percentil 75.
 
 ```{r percentil}
 qunif(0.75,min=2.5,max=3.5)
 ```
 
-El cuantil $x_{0.75}$ o percentil 75, que es 3.25, es el peso de un niño cualquiera entre 0 y 3 meses tal que supera al $75\%$ de los pesos de otros niños, y equivalentemente, 3.25 es el peso de un niño entre 0 y 3 meses tal que supera al $75\%$ de los niños en ese rango de edad en cuanto al pesos se refiere.
+El cuantil $z_{0.75}$ o percentil 75, que es 3.25, es el peso de un niño cualquiera entre 0 y 3 meses tal que supera al $75\%$ de los pesos de otros niños, y equivalentemente, 3.25 es el peso de un niño entre 0 y 3 meses tal que supera al $75\%$ de los niños en ese rango de edad en cuanto al pesos se refiere.
 
 # Distribución Normal
 
