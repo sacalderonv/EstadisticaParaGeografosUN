@@ -15,7 +15,7 @@ output:
 library(ggplot2)
 
 # Valor hasta el cual deseas sombrear el área bajo la curva
-valor_limite <- 2
+valor_limite <- -1
 
 # Crea una secuencia de valores para el eje x
 x <- seq(-3, 3, length = 1000)
