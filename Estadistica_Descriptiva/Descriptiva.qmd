@@ -23,6 +23,10 @@ hist(pesos,main = "Histograma Pesos Ceibas")
 hist(pesos,freq=FALSE,prob=TRUE,col = "lightblue",main='Histograma de pesos de Ceibas',xlab='Toneladas',ylab='Densidad')
 lines(density(pesos),col = "chocolate3")
 
+hist(Pesos_Alturas_Diametros$Pesos)
+hist(Pesos_Alturas_Diametros$Alturas)
+hist(Pesos_Alturas_Diametros$Diametros)
+
 ```
 
 **Ejercicio:** Use la base en BaseEjemplo.xlsx, y haga el histograma de frecuencias para las V.A's numéricas.
@@ -336,7 +340,7 @@ Se puede usar Tablas cruzadas para explorar relaciones entre variable categóric
 Una medida de la asociación entre variable categóricas es la V de Cramer, la cual mide que tan fuerte es la asociación. Más específicamente es el efecto del tamaño(**ES**) de la prueba de independencia chi-cuadrado(**La cual será vista mas adelante.**).
 
 | **Effect size (ES)** | **Interpretation**                                                                                           |
-|:------------------|:----------------------------------------------------|
+|:---------------------|:-------------------------------------------------------------------------------------------------------------|
 | ES ≤ 0.2             | The result is weak. Although the result is statistically significant, the fields are only weakly associated. |
 | 0.2 \< ES ≤ 0.6      | The result is moderate. The fields are moderately associated.                                                |
 | ES \> 0.6            | The result is strong. The fields are strongly associated.                                                    |
