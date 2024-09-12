@@ -173,7 +173,7 @@ sd(pesos)^2 ###Varianza
 max(pesos)-min(pesos) ##Rango
 
 skewness(pesos) ###Asimetría
-
+hist(pesos)
 kurtosis(pesos)###Coeficiente de apuntamiento o curtosis, permite ver si tiene colas mas pesadas que la de la distribución normal(el cual es 3 de forma teórica)
 
 ```
@@ -183,6 +183,7 @@ kurtosis(pesos)###Coeficiente de apuntamiento o curtosis, permite ver si tiene c
 ```{r Comparacion}
 library(plotly)
 library(readxl)
+library(tidyverse)
 Base_EncHog2022<-read_excel("EncHog2022.xlsx",col_types = c("text", "text", "numeric", "numeric", "text", "numeric", "numeric", "numeric"))
 str(Base_EncHog2022)
 
@@ -190,6 +191,29 @@ str(Base_EncHog2022)
 Base_EncHog2022%>%filter(Contrato_lab=="1")%>%select(Gan_Neta)%>%summarise(media_Gan_Neta = mean(Gan_Neta, na.rm = TRUE))
 
 filtrado_si_contrato_Gan_Neta<-Base_EncHog2022%>%filter(Contrato_lab=="1")%>%select(Gan_Neta)
+
+hist(filtrado_si_contrato_Gan_Neta$Gan_Neta)
+boxplot(filtrado_si_contrato_Gan_Neta$Gan_Neta)
+skewness(filtrado_si_contrato_Gan_Neta$Gan_Neta)
+
+
+
+######
+filtrado_no_contrato_Gan_Neta<-Base_EncHog2022%>%filter(Contrato_lab=="2")%>%select(Gan_Neta)
+
+hist(filtrado_no_contrato_Gan_Neta$Gan_Neta)
+boxplot(filtrado_no_contrato_Gan_Neta$Gan_Neta)
+skewness(filtrado_no_contrato_Gan_Neta$Gan_Neta)
+kurtosis(filtrado_no_contrato_Gan_Neta$Gan_Neta)
+
+####
+hist(Base_EncHog2022$Horas_Trab_Sem)
+boxplot(Base_EncHog2022$Horas_Trab_Sem)
+mean(Base_EncHog2022$Horas_Trab_Sem)
+quantile(Base_EncHog2022$Horas_Trab_Sem,probs = 0.75)
+
+
+
 
 ##Histograma Creado directamente
 Base_EncHog2022%>%filter(Contrato_lab=="1")%>%select(Gan_Neta)%>%ggplot(aes(x=Gan_Neta)) + 

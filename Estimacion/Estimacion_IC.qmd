@@ -42,7 +42,7 @@ Vamos a calcular el intervalo de confianza, la función *t.test* realiza el inte
 
 ```{r ic mu varianza desconocida}
 library(OneTwoSamples)
-t.test(Pesos_Alturas_Diametros$Pesos,var.equal =FALSE,conf.level = 0.95 ) ##Varianza conocida###
+t.test(Pesos_Alturas_Diametros$Pesos,var.equal =FALSE,conf.level = 0.95 ) ##Varianza desconocida###
 salida_IC<-OneTwoSamples::interval_estimate1(Pesos_Alturas_Diametros$Pesos,sigma=-1,alpha=0.05)###sigma=-1 quiere decir que la varianza es desconocida.
 salida_IC$a  #límite inferior.
 salida_IC$b  #Límite superior.
